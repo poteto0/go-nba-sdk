@@ -1,0 +1,35 @@
+name: 'Setup Go, GolangCI-Lint and Just'
+description: 'Sets up Go, GolangCI-Lint and Just environment'
+
+inputs:
+  go-version:
+    description: 'Go version to install'
+    required: false
+    default: '1.22'
+  golangci-lint-version:
+    description: 'golangci-lint version to install'
+    required: false
+    default: 'v1.60'
+  just-version:
+    description: 'just version to install'
+    required: false
+    default: '1'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{ inputs.go-version }}
+        cache: true
+
+    - name: Setup golangci-lint
+      uses: golangci/golangci-lint-action@v6
+      with:
+        version: ${{ inputs.golangci-lint-version }}
+
+    - name: Setup Just
+      uses: extractions/setup-just@v2
+      with:
+        just-version: ${{ inputs.just-version }}

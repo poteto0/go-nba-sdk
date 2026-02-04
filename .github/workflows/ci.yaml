@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ['1.25']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Check formatting
+        run: |
+          just fmt-check
+          git diff --exit-code
+
+      - name: Lint
+        run: just lint
+
+      - name: Test with Coverage
+        run: just unit-test-coverage
+
+      - name: Coverage Report
+        uses: k1LoW/octocov-action@v1
