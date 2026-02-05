@@ -15,41 +15,45 @@ func main() {
 
 	fmt.Println("======================= RS ==========================")
 	for _, content := range result.Contents.SeasonTotalsRegularSeason {
+		pts, _ := content.Pts.Take()
 		fmt.Printf("Season: %s, PPG: %.2f\n",
 			content.SeasonID,
-			content.PTS,
+			pts,
 		)
 	}
 
 	fmt.Println("======================= PO ==========================")
 	for _, content := range result.Contents.SeasonTotalsPostSeason {
+		pts, _ := content.Pts.Take()
 		fmt.Printf("Season: %s, PPG: %.2f\n",
 			content.SeasonID,
-			content.PTS,
+			pts,
 		)
 	}
 
 	fmt.Println("======================= COLLEGE ==========================")
 	for _, content := range result.Contents.SeasonTotalsCollegeSeason {
+		pts, _ := content.Pts.Take()
 		fmt.Printf("Season: %s, PPG: %.2f\n",
 			content.SeasonID,
-			content.PTS,
+			pts,
 		)
 	}
 
 	fmt.Println("======================= RANK ==============================")
 	for _, content := range result.Contents.SeasonRankingsRegularSeason {
 
-		if content.RankPgPts == 0 {
+		if content.RankPgPts.IsNone() {
 			fmt.Printf("Season: %s, PPG Rank: -\n",
 				content.SeasonID,
 			)
 			continue
 		}
 
+		v, _ := content.RankPgPts.Take()
 		fmt.Printf("Season: %s, PPG Rank: %d\n",
 			content.SeasonID,
-			content.RankPgPts,
+			v,
 		)
 	}
 }
