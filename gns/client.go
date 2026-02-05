@@ -14,7 +14,7 @@ type Client struct {
 	client internal.IHttpClient
 }
 
-func NewStatsClient() IClient {
+func NewClient() IClient {
 	return &Client{
 		client: internal.NewHttpClient(),
 	}

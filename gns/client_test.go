@@ -9,7 +9,7 @@ import (
 
 func Test_CreateStatsClient(t *testing.T) {
 	// Act
-	statsClient := gns.NewStatsClient()
+	statsClient := gns.NewClient()
 
 	// Assert
 	assert.NotNil(t, statsClient)

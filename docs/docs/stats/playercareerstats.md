@@ -1,3 +1,12 @@
+---
+sidebar_position: 2
+---
+
+# PlayerCareerStats
+
+## ⚡ Quick Start
+
+```go title="main.go"
 package main
 
 import (
@@ -57,3 +66,21 @@ func main() {
 		)
 	}
 }
+```
+
+## 📜 Details
+
+- [`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/player_career_stats.go)
+
+- Many columns return gooptional.
+
+  ```go
+  result := stats.GetPlayerCareerStats(client, stats.PlayerCareerStatsParams{
+  	PlayerID: "203076",
+  })
+
+  for _, content := range result.Contents.SeasonTotalsRegularSeason {
+  	// check if pts is present or not
+  	pts, err := content.Pts.Take()
+  }
+  ```

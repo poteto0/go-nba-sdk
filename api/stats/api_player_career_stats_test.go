@@ -12,7 +12,7 @@ import (
 func Test_GetPlayerCareerStats(t *testing.T) {
 	t.Run("can get player career stats", func(t *testing.T) {
 		// Arrange
-		client := gns.NewStatsClient()
+		client := gns.NewClient()
 
 		// Act
 		result := stats.GetPlayerCareerStats(client, stats.PlayerCareerStatsParams{
