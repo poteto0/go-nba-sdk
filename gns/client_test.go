@@ -9,8 +9,10 @@ import (
 
 func Test_CreateStatsClient(t *testing.T) {
 	// Act
-	statsClient := gns.NewClient()
+	cl := gns.NewClient()
 
 	// Assert
-	assert.NotNil(t, statsClient)
+	assert.NotNil(t, cl)
+	assert.NotNil(t, cl.Stats)
+	assert.NotNil(t, cl.Live)
 }

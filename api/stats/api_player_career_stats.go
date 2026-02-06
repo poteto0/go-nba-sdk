@@ -14,10 +14,15 @@ var DefaultPlayerCareerStatsParams = types.PlayerCareerStatsParams{
 	PerMode:  "PerGame",
 }
 
-func GetPlayerCareerStats(provider api.IProvider, params types.PlayerCareerStatsParams) types.Response[types.PlayerCareerStatsResponseContent] {
+func GetPlayerCareerStats(provider api.IProvider, params *types.PlayerCareerStatsParams) types.Response[types.PlayerCareerStatsResponseContent] {
+	if params == nil {
+		params = &DefaultPlayerCareerStatsParams
+	}
+
 	if params.LeagueID == "" {
 		params.LeagueID = DefaultPlayerCareerStatsParams.LeagueID
 	}
+
 	if params.PerMode == "" {
 		params.PerMode = DefaultPlayerCareerStatsParams.PerMode
 	}

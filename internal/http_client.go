@@ -8,8 +8,7 @@ import (
 )
 
 type HttpClient struct {
-	client        *http.Client
-	defaultHeader http.Header
+	client *http.Client
 }
 
 type IHttpClient interface {

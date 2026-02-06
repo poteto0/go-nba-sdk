@@ -9,19 +9,25 @@ import (
 	"github.com/poteto0/go-nba-sdk/types"
 )
 
-// 1. check response header for gzip
-// 2. if gzip, decompress
-// 3. read body
-// 4. return body as string in Response struct
-//
-// Caution: remember to close resp.Body in the caller function
+// ParseResponse parses the HTTP response into types.RawResponse.
+// This is primarily used for the Stats API.
+// Caution: remember to close resp.Body in the caller function.
 func ParseResponse(resp *http.Response) (types.RawResponse, error) {
+	var rawResp types.RawResponse
+	err := ParseResponseTo(resp, &rawResp)
+	return rawResp, err
+}
+
+// ParseResponseTo parses the HTTP response into the provided target.
+// It handles gzip decompression if necessary.
+// Caution: remember to close resp.Body in the caller function.
+func ParseResponseTo(resp *http.Response, target any) error {
 	var reader io.ReadCloser
 	switch resp.Header.Get("Content-Encoding") {
 	case "gzip":
 		gzipReader, err := gzip.NewReader(resp.Body)
 		if err != nil {
-			return types.RawResponse{}, err
+			return err
 		}
 		reader = gzipReader
 		defer reader.Close()
@@ -31,13 +37,12 @@ func ParseResponse(resp *http.Response) (types.RawResponse, error) {
 
 	bodyBytes, err := io.ReadAll(reader)
 	if err != nil {
-		return types.RawResponse{}, err
+		return err
 	}
 
-	var rawResp types.RawResponse
-	if err := json.Unmarshal(bodyBytes, &rawResp); err != nil {
-		return types.RawResponse{}, err
+	if err := json.Unmarshal(bodyBytes, target); err != nil {
+		return err
 	}
 
-	return rawResp, nil
+	return nil
 }

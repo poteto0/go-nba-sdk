@@ -14,7 +14,7 @@ Intuitive to use
 ```go
 client := gns.NewClient()I
 // Stats Namespace
-result := client.Stats.GetPlayerCareerStats(types.PlayerCareerStatsParams{
+result := client.Stats.GetPlayerCareerStats(&types.PlayerCareerStatsParams{
 	PlayerID: "203076",
 })
 ```
@@ -35,7 +35,7 @@ https://github.com/moznion/go-optional
 
 ```go
 client := gns.NewClient()
-result := client.Stats.GetPlayerCareerStats(types.PlayerCareerStatsParams{
+result := client.Stats.GetPlayerCareerStats(&types.PlayerCareerStatsParams{
 	PlayerID: "203076",
 })
 
