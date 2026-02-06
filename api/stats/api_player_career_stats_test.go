@@ -10,18 +10,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func newStatsNamespace() *stats.StatsNamespace {
-	provider := api.NewProvider()
-	return stats.NewStatsNamespace(provider)
+func newProviderForTest() api.IProvider {
+	return api.NewProvider()
 }
 
 func Test_GetPlayerCareerStats(t *testing.T) {
 	t.Run("can get player career stats", func(t *testing.T) {
 		// Arrange
-		statsNamespace := newStatsNamespace()
+		provider := newProviderForTest()
 
 		// Act
-		result := statsNamespace.GetPlayerCareerStats(types.PlayerCareerStatsParams{
+		result := stats.GetPlayerCareerStats(provider, types.PlayerCareerStatsParams{
 			PlayerID: "203076",
 		})
 

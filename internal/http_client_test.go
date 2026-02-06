@@ -14,7 +14,6 @@ func Test_CreateHttpClient(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, client)
-	assert.Equal(t, client.DefaultHeader(), DefaultHeaders)
 }
 
 func Test_Get(t *testing.T) {

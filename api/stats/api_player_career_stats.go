@@ -2,6 +2,7 @@ package stats
 
 import (
 	"github.com/google/go-querystring/query"
+	"github.com/poteto0/go-nba-sdk/api"
 	"github.com/poteto0/go-nba-sdk/constants"
 	"github.com/poteto0/go-nba-sdk/internal"
 	"github.com/poteto0/go-nba-sdk/parser"
@@ -13,7 +14,7 @@ var DefaultPlayerCareerStatsParams = types.PlayerCareerStatsParams{
 	PerMode:  "PerGame",
 }
 
-func (s *StatsNamespace) GetPlayerCareerStats(params types.PlayerCareerStatsParams) types.Response[types.PlayerCareerStatsResponseContent] {
+func GetPlayerCareerStats(provider api.IProvider, params types.PlayerCareerStatsParams) types.Response[types.PlayerCareerStatsResponseContent] {
 	if params.LeagueID == "" {
 		params.LeagueID = DefaultPlayerCareerStatsParams.LeagueID
 	}
@@ -29,7 +30,7 @@ func (s *StatsNamespace) GetPlayerCareerStats(params types.PlayerCareerStatsPara
 
 	path = path + "?" + v.Encode()
 
-	resp, err := s.provider.Get(path)
+	resp, err := provider.Get(path, nil)
 	if err != nil {
 		return types.Response[types.PlayerCareerStatsResponseContent]{Error: err}
 	}

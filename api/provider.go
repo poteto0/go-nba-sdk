@@ -7,7 +7,7 @@ import (
 )
 
 type IProvider interface {
-	Get(path string) (*http.Response, error)
+	Get(path string, headers *http.Header) (*http.Response, error)
 }
 
 type Provider struct {
@@ -20,6 +20,6 @@ func NewProvider() IProvider {
 	}
 }
 
-func (p *Provider) Get(path string) (*http.Response, error) {
-	return p.client.Get(path, nil)
+func (p *Provider) Get(path string, headers *http.Header) (*http.Response, error) {
+	return p.client.Get(path, headers)
 }
