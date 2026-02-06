@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # ScoreBoard
 
-## ⚡ Quick Start
+## :zap: Quick Start
 
 ```go title="main.go"
 package main
