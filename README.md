@@ -6,6 +6,10 @@ NBA API SDK for golang
 
 ## :zap: Quick Start
 
+```bash
+$ go get github.com/poteto0/go-nba-sdk
+```
+
 ```go title="main.go"
 package main
 
