@@ -1,25 +1,19 @@
 package gns
 
 import (
-	"net/http"
-
-	"github.com/poteto0/go-nba-sdk/internal"
+	"github.com/poteto0/go-nba-sdk/api"
+	"github.com/poteto0/go-nba-sdk/api/stats"
 )
 
-type IClient interface {
-	Get(path string) (*http.Response, error)
-}
+type IClient interface{}
 
 type Client struct {
-	client internal.IHttpClient
+	Stats stats.IStatsNamespace
 }
 
-func NewClient() IClient {
+func NewClient() *Client {
+	provider := api.NewProvider()
 	return &Client{
-		client: internal.NewHttpClient(),
+		Stats: stats.NewStatsNamespace(provider),
 	}
-}
-
-func (c *Client) Get(path string) (*http.Response, error) {
-	return c.client.Get(path, nil)
 }

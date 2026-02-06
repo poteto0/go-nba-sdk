@@ -4,18 +4,24 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/poteto0/go-nba-sdk/api"
 	"github.com/poteto0/go-nba-sdk/api/stats"
-	"github.com/poteto0/go-nba-sdk/gns"
+	"github.com/poteto0/go-nba-sdk/types"
 	"github.com/stretchr/testify/assert"
 )
+
+func newStatsNamespace() *stats.StatsNamespace {
+	provider := api.NewProvider()
+	return stats.NewStatsNamespace(provider)
+}
 
 func Test_GetPlayerCareerStats(t *testing.T) {
 	t.Run("can get player career stats", func(t *testing.T) {
 		// Arrange
-		client := gns.NewClient()
+		statsNamespace := newStatsNamespace()
 
 		// Act
-		result := stats.GetPlayerCareerStats(client, stats.PlayerCareerStatsParams{
+		result := statsNamespace.GetPlayerCareerStats(types.PlayerCareerStatsParams{
 			PlayerID: "203076",
 		})
 

@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 
-	"github.com/poteto0/go-nba-sdk/api/stats"
 	"github.com/poteto0/go-nba-sdk/gns"
+	"github.com/poteto0/go-nba-sdk/types"
 )
 
 func main() {
 	client := gns.NewClient()
-	result := stats.GetPlayerCareerStats(client, stats.PlayerCareerStatsParams{
+	result := client.Stats.GetPlayerCareerStats(types.PlayerCareerStatsParams{
 		PlayerID: "203076",
 	})
 
