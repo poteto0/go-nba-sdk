@@ -17,15 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: ['1.25']
+        go-version: ["1.24", "1.25"]
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup environment
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/setup-project
         with:
           go-version: ${{ matrix.go-version }}
+          golanci-lint-version: "v2.50"
+          just-version: "1.45.0"
 
       - name: Check formatting
         run: |

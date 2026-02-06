@@ -1,19 +1,19 @@
-name: 'Setup Go, GolangCI-Lint and Just'
-description: 'Sets up Go, GolangCI-Lint and Just environment'
+name: "Setup Go, GolangCI-Lint and Just"
+description: "Sets up Go, GolangCI-Lint and Just environment"
 
 inputs:
   go-version:
-    description: 'Go version to install'
+    description: "Go version to install"
     required: false
-    default: '1.22'
+    default: "1.22"
   golangci-lint-version:
-    description: 'golangci-lint version to install'
+    description: "golangci-lint version to install"
     required: false
-    default: 'v1.60'
+    default: "v2.50"
   just-version:
-    description: 'just version to install'
+    description: "just version to install"
     required: false
-    default: '1'
+    default: "1"
 
 runs:
   using: "composite"
