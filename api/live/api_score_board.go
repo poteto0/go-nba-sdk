@@ -25,14 +25,20 @@ func GetScoreBoard(provider api.IProvider, params *types.ScoreBoardParams) types
 
 	resp, err := provider.Get(path, &constants.DefaultLiveStatsHeaders)
 	if err != nil {
-		return types.Response[types.LiveScoreBoardResponse]{Error: err}
+		return types.Response[types.LiveScoreBoardResponse]{
+			StatusCode: resp.StatusCode,
+			Error:      err,
+		}
 	}
 	defer resp.Body.Close()
 
 	var scoreBoard types.LiveScoreBoardResponse
 	err = internal.ParseResponseTo(resp, &scoreBoard)
 	if err != nil {
-		return types.Response[types.LiveScoreBoardResponse]{Error: err}
+		return types.Response[types.LiveScoreBoardResponse]{
+			StatusCode: resp.StatusCode,
+			Error:      err,
+		}
 	}
 
 	return types.Response[types.LiveScoreBoardResponse]{
