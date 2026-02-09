@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/jarcoal/httpmock"
-	"github.com/poteto0/go-nba-sdk/api/live"
 	"github.com/poteto0/go-nba-sdk/constants"
 	"github.com/poteto0/go-nba-sdk/fixtures/samples"
 	"github.com/poteto0/go-nba-sdk/namespace"
@@ -56,10 +55,10 @@ func Test_Live_GetBoxScore(t *testing.T) {
 		)
 
 		// Arrange
-		provider := newProviderForTest()
+		sl := namespace.NewLiveNamespace(newProviderForTest())
 
 		// Act
-		result := live.GetBoxScore(provider, &types.BoxScoreParams{
+		result := sl.GetBoxScore(&types.BoxScoreParams{
 			GameID: "0022500733",
 		})
 
