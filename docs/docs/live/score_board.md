@@ -85,4 +85,4 @@ type ScoreBoardParams struct {
 
 ### Response
 
-[`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/live_score_board.go)
+[`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/response_live_score_board.go)

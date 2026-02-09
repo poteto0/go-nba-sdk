@@ -8,4 +8,5 @@ var (
 // live api
 var (
 	ScoreBoardPath = "scoreboard"
+	BoxScorePath   = "boxscore"
 )

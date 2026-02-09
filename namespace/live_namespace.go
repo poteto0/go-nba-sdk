@@ -8,6 +8,7 @@ import (
 
 type ILiveNamespace interface {
 	GetScoreBoard(params *types.ScoreBoardParams) types.Response[types.LiveScoreBoardResponse]
+	GetBoxScore(params *types.BoxScoreParams) types.Response[types.LiveBoxScoreResponse]
 }
 
 type LiveNamespace struct {
@@ -22,4 +23,8 @@ func NewLiveNamespace(provider api.IProvider) ILiveNamespace {
 
 func (l *LiveNamespace) GetScoreBoard(params *types.ScoreBoardParams) types.Response[types.LiveScoreBoardResponse] {
 	return live.GetScoreBoard(l.provider, params)
+}
+
+func (l *LiveNamespace) GetBoxScore(params *types.BoxScoreParams) types.Response[types.LiveBoxScoreResponse] {
+	return live.GetBoxScore(l.provider, params)
 }

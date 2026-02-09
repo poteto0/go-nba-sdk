@@ -7,6 +7,7 @@ import (
 	"github.com/poteto0/go-nba-sdk/constants"
 	"github.com/poteto0/go-nba-sdk/fixtures/samples"
 	"github.com/poteto0/go-nba-sdk/namespace"
+	"github.com/poteto0/go-nba-sdk/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -39,5 +40,30 @@ func Test_Live_GetScoreBoard(t *testing.T) {
 		assert.NotNil(t, result.Contents)
 		assert.NotEmpty(t, result.Contents.Scoreboard.Games)
 		assert.Equal(t, 200, result.Contents.Meta.Code)
+	})
+}
+
+func Test_Live_GetBoxScore(t *testing.T) {
+	t.Run("can get box score", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.LiveBaseUrl+constants.BoxScorePath+"/boxscore_0022500733.json",
+			httpmock.NewStringResponder(200, samples.SampleScoreBoardResponse),
+		)
+
+		// Arrange
+		sl := namespace.NewLiveNamespace(newProviderForTest())
+
+		// Act
+		result := sl.GetBoxScore(&types.BoxScoreParams{
+			GameID: "0022500733",
+		})
+
+		// Assert
+		assert.NotNil(t, result.Contents)
+		assert.NoError(t, result.Error)
 	})
 }
