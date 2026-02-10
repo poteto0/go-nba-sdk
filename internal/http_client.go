@@ -2,9 +2,9 @@ package internal
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/poteto0/go-nba-sdk/constants"
+	"github.com/poteto0/go-nba-sdk/types"
 )
 
 type HttpClient struct {
@@ -15,10 +15,10 @@ type IHttpClient interface {
 	Get(path string, headers *http.Header) (*http.Response, error)
 }
 
-func NewHttpClient() IHttpClient {
+func NewHttpClient(config *types.GnsConfig) IHttpClient {
 	return &HttpClient{
 		client: &http.Client{
-			Timeout: 10 * time.Second,
+			Timeout: config.Timeout,
 		},
 	}
 }

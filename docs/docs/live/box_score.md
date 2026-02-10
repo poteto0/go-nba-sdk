@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	client := gns.NewClient()
+	client := gns.NewClient(nil)
 	result := client.Live.GetBoxScore(
 		&types.BoxScoreParams{
 			GameID: "0022500733",

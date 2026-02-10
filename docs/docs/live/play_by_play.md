@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	client := gns.NewClient()
+	client := gns.NewClient(nil)
 	result := client.Live.GetPlayByPlay(
 		&types.PlayByPlayParams{
 			GameID: "0022000001",

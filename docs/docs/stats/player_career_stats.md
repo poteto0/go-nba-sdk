@@ -8,7 +8,7 @@ sidebar_position: 2
 
 ```go title="main.go"
 func main() {
-	client := gns.NewClient()
+	client := gns.NewClient(nil)
 	result := client.Stats.GetPlayerCareerStats(&types.PlayerCareerStatsParams{
 		PlayerID: "203076",
 	})

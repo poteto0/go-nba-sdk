@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	client := gns.NewClient()
+	client := gns.NewClient(nil)
 	result := client.Live.GetScoreBoard(nil)
 
 	games := result.Contents.Scoreboard.Games

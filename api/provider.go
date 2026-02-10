@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/poteto0/go-nba-sdk/internal"
+	"github.com/poteto0/go-nba-sdk/types"
 )
 
 type IProvider interface {
@@ -14,9 +15,11 @@ type Provider struct {
 	client internal.IHttpClient
 }
 
-func NewProvider() IProvider {
+func NewProvider(config *types.GnsConfig) IProvider {
 	return &Provider{
-		client: internal.NewHttpClient(),
+		client: internal.NewHttpClient(
+			config,
+		),
 	}
 }
 
