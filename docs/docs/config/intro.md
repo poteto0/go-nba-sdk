@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # 📌 Summary
 
-this is your go-nba-sdk config.
+This is your go-nba-sdk config.
 
 ```go title="config.go"
 type GnsConfig struct {
