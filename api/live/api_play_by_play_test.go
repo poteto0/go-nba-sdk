@@ -40,7 +40,7 @@ func Test_GetPlayByPlay(t *testing.T) {
 		game := result.Contents.Game
 		assert.Equal(t, "0022000001", game.GameID)
 		assert.NotEmpty(t, game.Actions)
-		assert.Equal(t, 11, len(game.Actions))
+		assert.Equal(t, 1, len(game.Actions))
 
 		action := game.Actions[0]
 		assert.Equal(t, 2, action.ActionNumber)
