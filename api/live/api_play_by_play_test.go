@@ -55,7 +55,7 @@ func Test_GetPlayByPlay(t *testing.T) {
 		httpmock.RegisterResponder(
 			"GET",
 			constants.LiveBaseUrl+constants.PlayByPlayPath+"/playbyplay_0022000001.json",
-			httpmock.NewStringResponder(200, "hello"),
+			httpmock.NewStringResponder(200, "invalid"),
 		)
 
 		// Arrange

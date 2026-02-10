@@ -27,6 +27,10 @@ func GetPlayerCareerStats(provider api.IProvider, params *types.PlayerCareerStat
 		params.PerMode = DefaultPlayerCareerStatsParams.PerMode
 	}
 
+	if err := validatePlayerCareerStatsParams(*params); err != nil {
+		return types.Response[types.PlayerCareerStatsResponseContent]{Error: err}
+	}
+
 	path := constants.StatsBaseUrl + constants.PlayerCareerStatsPath
 	v, err := query.Values(params)
 	if err != nil {
@@ -37,18 +41,27 @@ func GetPlayerCareerStats(provider api.IProvider, params *types.PlayerCareerStat
 
 	resp, err := provider.Get(path, nil)
 	if err != nil {
-		return types.Response[types.PlayerCareerStatsResponseContent]{Error: err}
+		return types.Response[types.PlayerCareerStatsResponseContent]{
+			StatusCode: resp.StatusCode,
+			Error:      err,
+		}
 	}
 	defer resp.Body.Close()
 
 	rawResp, err := internal.ParseResponse(resp)
 	if err != nil {
-		return types.Response[types.PlayerCareerStatsResponseContent]{Error: err}
+		return types.Response[types.PlayerCareerStatsResponseContent]{
+			StatusCode: resp.StatusCode,
+			Error:      err,
+		}
 	}
 
 	contents, err := parser.ParsePlayerCareerStatsResponse(rawResp)
 	if err != nil {
-		return types.Response[types.PlayerCareerStatsResponseContent]{Error: err}
+		return types.Response[types.PlayerCareerStatsResponseContent]{
+			StatusCode: resp.StatusCode,
+			Error:      err,
+		}
 	}
 
 	return types.Response[types.PlayerCareerStatsResponseContent]{
@@ -56,4 +69,12 @@ func GetPlayerCareerStats(provider api.IProvider, params *types.PlayerCareerStat
 		StatusCode: resp.StatusCode,
 		Error:      nil,
 	}
+}
+
+func validatePlayerCareerStatsParams(params types.PlayerCareerStatsParams) error {
+	if params.PlayerID == "" {
+		return types.NewGnsError("player id is required")
+	}
+
+	return nil
 }

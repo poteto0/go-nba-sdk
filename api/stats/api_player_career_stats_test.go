@@ -35,4 +35,61 @@ func Test_GetPlayerCareerStats(t *testing.T) {
 		assert.NotNil(t, result.Contents)
 		assert.Equal(t, 200, result.StatusCode)
 	})
+
+	t.Run("response parse error w/ http status code", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.StatsBaseUrl+constants.PlayerCareerStatsPath,
+			httpmock.NewStringResponder(200, "invalid"),
+		)
+
+		// Arrange
+		provider := newProviderForTest()
+
+		// Act
+		result := stats.GetPlayerCareerStats(provider, &types.PlayerCareerStatsParams{
+			PlayerID: "203076",
+		})
+
+		// Assert
+		assert.Error(t, result.Error)
+		assert.Equal(t, 200, result.StatusCode)
+	})
+
+	t.Run("invalid resultSet", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.StatsBaseUrl+constants.PlayerCareerStatsPath,
+			httpmock.NewStringResponder(200, samples.SampleInvalidPlayerCareerStats),
+		)
+
+		// Arrange
+		provider := newProviderForTest()
+
+		// Act
+		result := stats.GetPlayerCareerStats(provider, &types.PlayerCareerStatsParams{
+			PlayerID: "203076",
+		})
+
+		// Assert
+		assert.Error(t, result.Error)
+		assert.Equal(t, 200, result.StatusCode)
+	})
+
+	t.Run("player id is required", func(t *testing.T) {
+		// Arrange
+		provider := newProviderForTest()
+
+		// Act
+		result := stats.GetPlayerCareerStats(provider, nil)
+
+		// Assert
+		assert.Error(t, result.Error)
+	})
 }
