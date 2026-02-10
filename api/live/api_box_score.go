@@ -8,7 +8,7 @@ import (
 )
 
 func GetBoxScore(provider api.IProvider, params *types.BoxScoreParams) types.Response[types.LiveBoxScoreResponse] {
-	if err := isValidBoxScoreParams(params); err != nil {
+	if err := validateBoxScoreParams(params); err != nil {
 		return types.Response[types.LiveBoxScoreResponse]{Error: err}
 	}
 
@@ -40,7 +40,7 @@ func GetBoxScore(provider api.IProvider, params *types.BoxScoreParams) types.Res
 	}
 }
 
-func isValidBoxScoreParams(params *types.BoxScoreParams) error {
+func validateBoxScoreParams(params *types.BoxScoreParams) error {
 	if params == nil {
 		return types.NewGnsError("boxscore params is required")
 	}

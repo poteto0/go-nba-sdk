@@ -8,7 +8,7 @@ import (
 )
 
 func GetPlayByPlay(provider api.IProvider, params *types.PlayByPlayParams) types.Response[types.LivePlayByPlayResponse] {
-	if err := isValidPlayByPlayParams(params); err != nil {
+	if err := validatePlayByPlayParams(params); err != nil {
 		return types.Response[types.LivePlayByPlayResponse]{Error: err}
 	}
 
@@ -40,7 +40,7 @@ func GetPlayByPlay(provider api.IProvider, params *types.PlayByPlayParams) types
 	}
 }
 
-func isValidPlayByPlayParams(params *types.PlayByPlayParams) error {
+func validatePlayByPlayParams(params *types.PlayByPlayParams) error {
 	if params == nil {
 		return types.NewGnsError("playbyplay params is required")
 	}
