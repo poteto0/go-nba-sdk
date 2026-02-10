@@ -10,7 +10,7 @@ import (
 
 func Test_CreateHttpClient(t *testing.T) {
 	// Act
-	client := NewHttpClient()
+	client := NewHttpClient(nil)
 
 	// Assert
 	assert.NotNil(t, client)
@@ -37,7 +37,8 @@ func Test_Get(t *testing.T) {
 	}))
 	defer server.Close()
 
-	client := NewHttpClient()
+	// Arrange
+	client := NewHttpClient(nil)
 
 	t.Run("Get with default headers", func(t *testing.T) {
 		// Act

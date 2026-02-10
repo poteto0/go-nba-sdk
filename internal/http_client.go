@@ -5,20 +5,33 @@ import (
 	"time"
 
 	"github.com/poteto0/go-nba-sdk/constants"
+	"github.com/poteto0/go-nba-sdk/types"
 )
 
 type HttpClient struct {
 	client *http.Client
 }
 
+var DefaultConfig = &types.GnsConfig{
+	Timeout: 10 * time.Second,
+}
+
 type IHttpClient interface {
 	Get(path string, headers *http.Header) (*http.Response, error)
 }
 
-func NewHttpClient() IHttpClient {
+func NewHttpClient(config *types.GnsConfig) IHttpClient {
+	if config == nil {
+		config = DefaultConfig
+	}
+
+	if config.Timeout == 0 {
+		config.Timeout = DefaultConfig.Timeout
+	}
+
 	return &HttpClient{
 		client: &http.Client{
-			Timeout: 10 * time.Second,
+			Timeout: config.Timeout,
 		},
 	}
 }

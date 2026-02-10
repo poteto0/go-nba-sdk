@@ -5,5 +5,5 @@ import (
 )
 
 func newProviderForTest() api.IProvider {
-	return api.NewProvider()
+	return api.NewProvider(nil)
 }

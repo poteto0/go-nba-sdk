@@ -12,7 +12,7 @@ GoLang SDK for NBA API
 Intuitive to use
 
 ```go
-client := gns.NewClient()I
+client := gns.NewClient(nil)
 // Stats Namespace
 result := client.Stats.GetPlayerCareerStats(&types.PlayerCareerStatsParams{
 	PlayerID: "203076",
@@ -34,7 +34,7 @@ https://github.com/moznion/go-optional
 :::
 
 ```go
-client := gns.NewClient()
+client := gns.NewClient(nil)
 result := client.Stats.GetPlayerCareerStats(&types.PlayerCareerStatsParams{
 	PlayerID: "203076",
 })
