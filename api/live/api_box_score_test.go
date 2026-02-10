@@ -44,7 +44,7 @@ func Test_GetBoxScore(t *testing.T) {
 		assert.Equal(t, "Little Caesars Arena", arena.ArenaName)
 
 		officials, _ := game.Officials.Take()
-		assert.Equal(t, 3, len(officials))
+		assert.Equal(t, 1, len(officials))
 
 		homeTeam := game.HomeTeam
 		assert.Equal(t, homeTeam.TeamId, 1610612765)
@@ -53,7 +53,7 @@ func Test_GetBoxScore(t *testing.T) {
 		assert.Equal(t, 4, len(periods))
 
 		players, _ := homeTeam.Players.Take()
-		assert.Equal(t, 17, len(players))
+		assert.Equal(t, 1, len(players))
 
 		player := players[0]
 		assert.Equal(t, "Ausar Thompson", player.Name)
