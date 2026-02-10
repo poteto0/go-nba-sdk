@@ -5,6 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/poteto0/go-nba-sdk/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,6 +15,30 @@ func Test_CreateHttpClient(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, client)
+}
+
+func Test_CreateHttpClient_WithProxy(t *testing.T) {
+	// Arrange
+	proxyUrl := "http://localhost:8080"
+	config := &types.GnsConfig{
+		ProxyUrl: proxyUrl,
+	}
+
+	// Act
+	client := NewHttpClient(config).(*HttpClient)
+
+	// Assert
+	assert.NotNil(t, client)
+
+	transport, ok := client.client.Transport.(*http.Transport)
+	assert.True(t, ok, "Transport should be *http.Transport")
+	assert.NotNil(t, transport)
+
+	req, _ := http.NewRequest("GET", "http://example.com", nil)
+	url, err := transport.Proxy(req)
+	assert.NoError(t, err)
+	assert.NotNil(t, url)
+	assert.Equal(t, proxyUrl, url.String())
 }
 
 func Test_Get(t *testing.T) {

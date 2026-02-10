@@ -2,6 +2,7 @@ package internal
 
 import (
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/poteto0/go-nba-sdk/constants"
@@ -29,10 +30,24 @@ func NewHttpClient(config *types.GnsConfig) IHttpClient {
 		config.Timeout = DefaultConfig.Timeout
 	}
 
+	httpClient := &http.Client{
+		Timeout: config.Timeout,
+	}
+
+	if config.ProxyUrl != "" {
+		proxyUrl, err := url.Parse(config.ProxyUrl)
+
+		if err != nil {
+			panic(err)
+		}
+
+		httpClient.Transport = &http.Transport{
+			Proxy: http.ProxyURL(proxyUrl),
+		}
+	}
+
 	return &HttpClient{
-		client: &http.Client{
-			Timeout: config.Timeout,
-		},
+		client: httpClient,
 	}
 }
 
