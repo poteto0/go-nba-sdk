@@ -36,10 +36,13 @@ func NewHttpClient(config *types.GnsConfig) IHttpClient {
 
 	if config.ProxyUrl != "" {
 		proxyUrl, err := url.Parse(config.ProxyUrl)
-		if err == nil {
-			httpClient.Transport = &http.Transport{
-				Proxy: http.ProxyURL(proxyUrl),
-			}
+
+		if err != nil {
+			panic(err)
+		}
+
+		httpClient.Transport = &http.Transport{
+			Proxy: http.ProxyURL(proxyUrl),
 		}
 	}
 
