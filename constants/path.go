@@ -9,4 +9,5 @@ var (
 var (
 	ScoreBoardPath = "scoreboard"
 	BoxScorePath   = "boxscore"
+	PlayByPlayPath = "playbyplay"
 )

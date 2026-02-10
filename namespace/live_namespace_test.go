@@ -67,3 +67,29 @@ func Test_Live_GetBoxScore(t *testing.T) {
 		assert.NoError(t, result.Error)
 	})
 }
+
+func Test_Live_GetPlayByPlay(t *testing.T) {
+	t.Run("can get play by play", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.LiveBaseUrl+constants.PlayByPlayPath+"/playbyplay_0022000001.json",
+			httpmock.NewStringResponder(200, samples.SampleLivePlayByPlayResponse),
+		)
+
+		// Arrange
+		sl := namespace.NewLiveNamespace(newProviderForTest())
+
+		// Act
+		result := sl.GetPlayByPlay(&types.PlayByPlayParams{
+			GameID: "0022000001",
+		})
+
+		// Assert
+		assert.NotNil(t, result.Contents)
+		assert.NoError(t, result.Error)
+		assert.Equal(t, "0022000001", result.Contents.Game.GameID)
+	})
+}

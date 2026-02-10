@@ -9,3 +9,8 @@ type BoxScoreParams struct {
 	// !required
 	GameID string
 }
+
+type PlayByPlayParams struct {
+	// !required
+	GameID string
+}
