@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# BoxScore
+# PlayByPlay
 
 ## :zap: Quick Start
 
