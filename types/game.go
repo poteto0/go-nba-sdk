@@ -1,6 +1,7 @@
 package types
 
 import (
+	"strings"
 	"time"
 
 	"github.com/moznion/go-optional"
@@ -34,6 +35,22 @@ type Game struct {
 }
 
 // if the game is finished or not
-func (g Game) IsFinished() bool {
+func (g *Game) IsFinished() bool {
 	return g.GameStatus == 3
+}
+
+// parse clock
+// PT07M11.01S -> 07:11.01
+func (g *Game) Clock() string {
+	return parseClockTypeStr(g.GameClock)
+}
+
+func (g *Game) ClockMinutes() (float64, bool) {
+	minutesSplit := strings.Split(g.Clock(), ":")[0]
+	return parseNumFromParsedClockTypeStr(minutesSplit)
+}
+
+func (g *Game) ClockSeconds() (float64, bool) {
+	secondsSplit := strings.Split(g.Clock(), ":")[1]
+	return parseNumFromParsedClockTypeStr(secondsSplit)
 }
