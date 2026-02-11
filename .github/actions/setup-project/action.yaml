@@ -5,11 +5,11 @@ inputs:
   go-version:
     description: "Go version to install"
     required: false
-    default: "1.25.1"
+    default: "1.26.0"
   golangci-lint-version:
     description: "golangci-lint version to install"
     required: false
-    default: "v2.5.0"
+    default: "v2.9.0"
   just-version:
     description: "just version to install"
     required: false
