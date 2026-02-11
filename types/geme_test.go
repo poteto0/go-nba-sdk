@@ -40,3 +40,71 @@ func TestGame_JudgeTheGameIsFinished(t *testing.T) {
 		})
 	}
 }
+
+func TestGame_ParseGameClock(t *testing.T) {
+	// Arrange
+	game := types.Game{
+		GameClock: "PT07M11.01S",
+	}
+
+	// Act & Assert
+	assert.Equal(t, "07:11.01", game.Clock())
+}
+
+func TestGame_ParseClockMinutes(t *testing.T) {
+	t.Run("parse valid minutes", func(t *testing.T) {
+		// Arrange
+		game := types.Game{
+			GameClock: "PT07M11.01S",
+		}
+
+		// Act
+		minutes, ok := game.ClockMinutes()
+
+		// Assert
+		assert.True(t, ok)
+		assert.Equal(t, 7.0, minutes)
+	})
+
+	t.Run("not ok on invalid minutes", func(t *testing.T) {
+		// Arrange
+		game := types.Game{
+			GameClock: "PTaaM11.01S",
+		}
+
+		// Act
+		_, ok := game.ClockMinutes()
+
+		// Assert
+		assert.False(t, ok)
+	})
+}
+
+func TestGame_ParseClockSeconds(t *testing.T) {
+	t.Run("parse valid seconds", func(t *testing.T) {
+		// Arrange
+		game := types.Game{
+			GameClock: "PT07M11.01S",
+		}
+
+		// Act
+		seconds, ok := game.ClockSeconds()
+
+		// Assert
+		assert.True(t, ok)
+		assert.Equal(t, 11.01, seconds)
+	})
+
+	t.Run("not ok on invalid seconds", func(t *testing.T) {
+		// Arrange
+		game := types.Game{
+			GameClock: "PT07Maa.01S",
+		}
+
+		// Act
+		_, ok := game.ClockSeconds()
+
+		// Assert
+		assert.False(t, ok)
+	})
+}

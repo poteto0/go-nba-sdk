@@ -1,45 +1,79 @@
 package types
 
-import "github.com/moznion/go-optional"
+import (
+	"strings"
+
+	"github.com/moznion/go-optional"
+)
 
 type CommonBoxScoreStatistic struct {
-	Ast             optional.Option[int]     `json:"assists"`
-	Blk             optional.Option[int]     `json:"blocks"`
-	BlkReceived     optional.Option[int]     `json:"blocksReceived"`
-	FgA             optional.Option[int]     `json:"fieldGoalsAttempted"`
-	FgM             optional.Option[int]     `json:"fieldGoalsMade"`
-	FgPct           optional.Option[float64] `json:"fieldGoalsPercentage"`
-	PFOffensive     optional.Option[int]     `json:"foulsOffensive"`
-	PFDrawn         optional.Option[int]     `json:"foulsDrawn"`
-	PF              optional.Option[int]     `json:"foulsPersonal"`
-	PFTechnical     optional.Option[int]     `json:"foulsTechnical"`
-	FtA             optional.Option[int]     `json:"freeThrowsAttempted"`
-	FtM             optional.Option[int]     `json:"freeThrowsMade"`
-	FtPct           optional.Option[float64] `json:"freeThrowsPercentage"`
-	Pts             optional.Option[int]     `json:"points"`
-	PtsFastBreak    optional.Option[int]     `json:"pointsFastBreak"`
-	PtsInPaint      optional.Option[int]     `json:"pointsInThePaint"`
-	PtsSecondChance optional.Option[int]     `json:"pointsSecondChance"`
-	DReb            optional.Option[int]     `json:"reboundsDefensive"`
-	OReb            optional.Option[int]     `json:"reboundsOffensive"`
-	Reb             optional.Option[int]     `json:"reboundsTotal"`
-	Stl             optional.Option[int]     `json:"steals"`
-	Fg3A            optional.Option[int]     `json:"threePointersAttempted"`
-	Fg3M            optional.Option[int]     `json:"threePointersMade"`
-	Fg3Pct          optional.Option[float64] `json:"threePointersPercentage"`
-	Tov             optional.Option[int]     `json:"turnovers"`
-	Fg2A            optional.Option[int]     `json:"twoPointersAttempted"`
-	Fg2M            optional.Option[int]     `json:"twoPointersMade"`
-	Fg2Pct          optional.Option[float64] `json:"twoPointersPercentage"`
+	Minutes           string                   `json:"minutes"`
+	MinutesCalculated optional.Option[string]  `json:"minutesCalculated"`
+	Ast               optional.Option[int]     `json:"assists"`
+	Blk               optional.Option[int]     `json:"blocks"`
+	BlkReceived       optional.Option[int]     `json:"blocksReceived"`
+	FgA               optional.Option[int]     `json:"fieldGoalsAttempted"`
+	FgM               optional.Option[int]     `json:"fieldGoalsMade"`
+	FgPct             optional.Option[float64] `json:"fieldGoalsPercentage"`
+	PFOffensive       optional.Option[int]     `json:"foulsOffensive"`
+	PFDrawn           optional.Option[int]     `json:"foulsDrawn"`
+	PF                optional.Option[int]     `json:"foulsPersonal"`
+	PFTechnical       optional.Option[int]     `json:"foulsTechnical"`
+	FtA               optional.Option[int]     `json:"freeThrowsAttempted"`
+	FtM               optional.Option[int]     `json:"freeThrowsMade"`
+	FtPct             optional.Option[float64] `json:"freeThrowsPercentage"`
+	Pts               optional.Option[int]     `json:"points"`
+	PtsFastBreak      optional.Option[int]     `json:"pointsFastBreak"`
+	PtsInPaint        optional.Option[int]     `json:"pointsInThePaint"`
+	PtsSecondChance   optional.Option[int]     `json:"pointsSecondChance"`
+	DReb              optional.Option[int]     `json:"reboundsDefensive"`
+	OReb              optional.Option[int]     `json:"reboundsOffensive"`
+	Reb               optional.Option[int]     `json:"reboundsTotal"`
+	Stl               optional.Option[int]     `json:"steals"`
+	Fg3A              optional.Option[int]     `json:"threePointersAttempted"`
+	Fg3M              optional.Option[int]     `json:"threePointersMade"`
+	Fg3Pct            optional.Option[float64] `json:"threePointersPercentage"`
+	Tov               optional.Option[int]     `json:"turnovers"`
+	Fg2A              optional.Option[int]     `json:"twoPointersAttempted"`
+	Fg2M              optional.Option[int]     `json:"twoPointersMade"`
+	Fg2Pct            optional.Option[float64] `json:"twoPointersPercentage"`
+}
+
+// parse minutes
+//
+// PT07M11.01S -> 07:11.01
+func (c *CommonBoxScoreStatistic) MinutesClock() string {
+	return parseClockTypeStr(c.Minutes)
+}
+
+// parse & calculated minutes
+//
+// PT36M30.00S -> 36.5
+func (c *CommonBoxScoreStatistic) Min() (float64, bool) {
+	clockSplit := strings.Split(c.MinutesClock(), ":")
+	if len(clockSplit) != 2 {
+		return 0, false
+	}
+
+	minutesStr, secondsStr := clockSplit[0], clockSplit[1]
+	minutes, ok := parseNumFromParsedClockTypeStr(minutesStr)
+	if !ok {
+		return 0, false
+	}
+
+	seconds, ok := parseNumFromParsedClockTypeStr(secondsStr)
+	if !ok {
+		return 0, false
+	}
+
+	return minutes + seconds/60, true
 }
 
 type PlayerBoxScoreStatistic struct {
 	CommonBoxScoreStatistic
-	Minus             optional.Option[float64] `json:"minus"`
-	Minutes           optional.Option[string]  `json:"minutes"`
-	MinutesCalculated optional.Option[string]  `json:"minutesCalculated"`
-	Plus              optional.Option[float64] `json:"plus"`
-	PlusMinus         optional.Option[float64] `json:"plusMinusPoints"`
+	Minus     optional.Option[float64] `json:"minus"`
+	Plus      optional.Option[float64] `json:"plus"`
+	PlusMinus optional.Option[float64] `json:"plusMinusPoints"`
 }
 
 type TeamBoxScoreStatistic struct {
