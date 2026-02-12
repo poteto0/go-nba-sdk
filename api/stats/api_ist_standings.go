@@ -11,7 +11,8 @@ import (
 
 var DefaultIstStandingsParams = types.IstStandingsParams{
 	LeagueID: "00",
-	Season:   "2023-24",
+	Season:   "2025-26",
+	Section:  "group",
 }
 
 func GetIstStandings(provider api.IProvider, params *types.IstStandingsParams) types.Response[types.IstStandingsResponseContent] {
@@ -25,6 +26,14 @@ func GetIstStandings(provider api.IProvider, params *types.IstStandingsParams) t
 
 	if params.Season == "" {
 		params.Season = DefaultIstStandingsParams.Season
+	}
+
+	if params.Section == "" {
+		params.Section = DefaultIstStandingsParams.Section
+	}
+
+	if err := validateIstStandingsParams(*params); err != nil {
+		return types.Response[types.IstStandingsResponseContent]{Error: err}
 	}
 
 	path := constants.StatsBaseUrl + constants.IstStandingsPath
@@ -65,4 +74,12 @@ func GetIstStandings(provider api.IProvider, params *types.IstStandingsParams) t
 		StatusCode: resp.StatusCode,
 		Error:      nil,
 	}
+}
+
+func validateIstStandingsParams(params types.IstStandingsParams) error {
+	if params.Section != "group" && params.Section != "wildcard" {
+		return types.NewGnsError("section is allowed, group or wildcard")
+	}
+
+	return nil
 }

@@ -8,7 +8,9 @@ import (
 
 type IStatsNamespace interface {
 	GetPlayerCareerStats(params *types.PlayerCareerStatsParams) types.Response[types.PlayerCareerStatsResponseContent]
-	GetStandings(params *types.IstStandingsParams) types.Response[types.IstStandingsResponseContent]
+
+	// get standings (ist)
+	GetIstStandings(params *types.IstStandingsParams) types.Response[types.IstStandingsResponseContent]
 }
 
 type StatsNamespace struct {
@@ -25,6 +27,6 @@ func (s *StatsNamespace) GetPlayerCareerStats(params *types.PlayerCareerStatsPar
 	return stats.GetPlayerCareerStats(s.provider, params)
 }
 
-func (s *StatsNamespace) GetStandings(params *types.IstStandingsParams) types.Response[types.IstStandingsResponseContent] {
+func (s *StatsNamespace) GetIstStandings(params *types.IstStandingsParams) types.Response[types.IstStandingsResponseContent] {
 	return stats.GetIstStandings(s.provider, params)
 }

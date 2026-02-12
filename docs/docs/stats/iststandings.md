@@ -4,15 +4,20 @@ sidebar_position: 3
 
 # Standings (IST)
 
+Get in-season-tournament Standings.
+
 ## ⚡ Quick Start
 
 ```go title="main.go"
 func main() {
 	client := gns.NewClient(nil)
-	result := client.Stats.GetStandings(&types.IstStandingsParams{
-		LeagueID: "00",
-		Season:   "2023-24",
-	})
+	result := client.Stats.GetIstStandings(
+		&types.IstStandingsParams{
+			LeagueID: "00",
+			Season:   "2025-26",
+			Section: "group",
+		}, // or nil
+	)
 
 	if result.Error != nil {
 		panic(result.Error)
@@ -38,7 +43,7 @@ type IstStandingsParams struct {
 	// optional default "00"
 	LeagueID string `url:"LeagueID"`
 
-	// optional default "2023-24"
+	// optional default "2025-26"
 	Season string `url:"Season"`
 }
 ```
@@ -46,5 +51,3 @@ type IstStandingsParams struct {
 ### Response
 
 [`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/response_ist_standings.go)
-
-```

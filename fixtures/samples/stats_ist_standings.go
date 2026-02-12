@@ -4,7 +4,7 @@ var SampleIstStandingsResponse = `{
     "resource": "iststandings",
     "parameters": {
         "LeagueID": "00",
-        "Season": "2023-24"
+        "Season": "2025-26"
     },
     "resultSets": [
         {
@@ -76,5 +76,16 @@ var SampleIstStandingsResponse = `{
                 ]
             ]
         }
+    ]
+}`
+
+var SampleInvalidIstStandingsResponse = `{
+    "resource": "iststandings",
+    "parameters": {
+        "LeagueID": "00",
+        "Season": "2025-26"
+    },
+    "resultSets": [
+        "hello",
     ]
 }`
