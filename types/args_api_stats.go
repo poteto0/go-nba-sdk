@@ -22,3 +22,18 @@ type IstStandingsParams struct {
 	// group or wildcard
 	Section string `url:"Section"`
 }
+
+type LeagueStandingsParams struct {
+	// optional default "00"
+	LeagueID string `url:"LeagueID"`
+
+	// optional default "2025-26"
+	Season string `url:"Season"`
+
+	// optional default "Regular Season"
+	// "Regular Season" or "Pre Season"
+	SeasonType string `url:"SeasonType"`
+
+	// optional
+	SeasonYear string `url:"SeasonYear"`
+}

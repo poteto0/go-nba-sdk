@@ -72,3 +72,30 @@ func Test_Stats_GetIstStandings(t *testing.T) {
 		assert.Equal(t, 200, result.StatusCode)
 	})
 }
+
+func Test_Stats_GetLeagueStandings(t *testing.T) {
+	t.Run("can get league standings", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.StatsBaseUrl+constants.LeagueStandingsPath,
+			httpmock.NewStringResponder(200, samples.SampleLeagueStandingsResponse),
+		)
+
+		// Arrange
+		sn := namespace.NewStatsNamespace(newProviderForTest())
+
+		// Act
+		result := sn.GetLeagueStandings(&types.LeagueStandingsParams{
+			LeagueID: "00",
+			Season:   "2025-26",
+		})
+
+		// Assert
+		assert.NoError(t, result.Error)
+		assert.NotNil(t, result.Contents)
+		assert.Equal(t, 200, result.StatusCode)
+	})
+}

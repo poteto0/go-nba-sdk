@@ -4,6 +4,7 @@ package constants
 var (
 	PlayerCareerStatsPath = "playercareerstats"
 	IstStandingsPath      = "iststandings"
+	LeagueStandingsPath   = "leaguestandings"
 )
 
 // live api
