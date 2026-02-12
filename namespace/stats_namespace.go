@@ -11,6 +11,9 @@ type IStatsNamespace interface {
 
 	// get standings (ist)
 	GetIstStandings(params *types.IstStandingsParams) types.Response[types.IstStandingsResponseContent]
+
+	// get standings (league)
+	GetLeagueStandings(params *types.LeagueStandingsParams) types.Response[types.LeagueStandingsResponseContent]
 }
 
 type StatsNamespace struct {
@@ -29,4 +32,8 @@ func (s *StatsNamespace) GetPlayerCareerStats(params *types.PlayerCareerStatsPar
 
 func (s *StatsNamespace) GetIstStandings(params *types.IstStandingsParams) types.Response[types.IstStandingsResponseContent] {
 	return stats.GetIstStandings(s.provider, params)
+}
+
+func (s *StatsNamespace) GetLeagueStandings(params *types.LeagueStandingsParams) types.Response[types.LeagueStandingsResponseContent] {
+	return stats.GetLeagueStandings(s.provider, params)
 }

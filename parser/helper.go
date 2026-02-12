@@ -61,3 +61,14 @@ func toOptionalFloat(v any) optional.Option[float64] {
 	}
 	return optional.None[float64]()
 }
+
+func toOptionalString(v any) optional.Option[string] {
+	if v == nil {
+		return optional.None[string]()
+	}
+
+	if s, ok := v.(string); ok {
+		return optional.Some(s)
+	}
+	return optional.None[string]()
+}
