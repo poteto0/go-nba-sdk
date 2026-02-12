@@ -5,7 +5,6 @@ import (
 	"github.com/poteto0/go-nba-sdk/api"
 	"github.com/poteto0/go-nba-sdk/constants"
 	"github.com/poteto0/go-nba-sdk/internal"
-	"github.com/poteto0/go-nba-sdk/parser"
 	"github.com/poteto0/go-nba-sdk/types"
 )
 
@@ -53,16 +52,8 @@ func GetIstStandings(provider api.IProvider, params *types.IstStandingsParams) t
 	}
 	defer resp.Body.Close()
 
-	rawResp, err := internal.ParseResponse(resp)
-	if err != nil {
-		return types.Response[types.IstStandingsResponseContent]{
-			StatusCode: resp.StatusCode,
-			Error:      err,
-		}
-	}
-
-	contents, err := parser.ParseIstStandingsResponse(rawResp)
-	if err != nil {
+	var contents types.IstStandingsResponseContent
+	if err := internal.ParseResponseTo(resp, &contents); err != nil {
 		return types.Response[types.IstStandingsResponseContent]{
 			StatusCode: resp.StatusCode,
 			Error:      err,

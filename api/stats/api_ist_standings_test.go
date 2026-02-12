@@ -32,8 +32,8 @@ func Test_GetIstStandings(t *testing.T) {
 		// Assert
 		assert.Nil(t, result.Error)
 		assert.Equal(t, 200, result.StatusCode)
-		assert.Equal(t, 1, len(result.Contents.Standings))
-		assert.Equal(t, "Lakers", result.Contents.Standings[0].TeamName)
+		assert.Equal(t, 1, len(result.Contents.Teams))
+		assert.Equal(t, "Hawks", result.Contents.Teams[0].TeamName)
 	})
 
 	t.Run("can get ist standings w/o section", func(t *testing.T) {
@@ -59,29 +59,8 @@ func Test_GetIstStandings(t *testing.T) {
 		// Assert
 		assert.Nil(t, result.Error)
 		assert.Equal(t, 200, result.StatusCode)
-		assert.Equal(t, 1, len(result.Contents.Standings))
-		assert.Equal(t, "Lakers", result.Contents.Standings[0].TeamName)
-	})
-
-	t.Run("parser error w/ http status code", func(t *testing.T) {
-		httpmock.Activate(t)
-		defer httpmock.DeactivateAndReset()
-
-		path := constants.StatsBaseUrl + constants.IstStandingsPath + "?LeagueID=00&Season=2025-26&Section=group"
-		httpmock.RegisterResponder(
-			"GET",
-			path,
-			httpmock.NewStringResponder(200, samples.SampleInvalidPlayerCareerStats),
-		)
-
-		provider := newProviderForTest()
-
-		// Act
-		result := stats.GetIstStandings(provider, nil)
-
-		// Assert
-		assert.NotNil(t, result.Error)
-		assert.Equal(t, 200, result.StatusCode)
+		assert.Equal(t, 1, len(result.Contents.Teams))
+		assert.Equal(t, "Hawks", result.Contents.Teams[0].TeamName)
 	})
 
 	t.Run("response parse error w/ http status code", func(t *testing.T) {

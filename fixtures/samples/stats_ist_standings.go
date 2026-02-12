@@ -1,91 +1,45 @@
 package samples
 
 var SampleIstStandingsResponse = `{
-    "resource": "iststandings",
-    "parameters": {
-        "LeagueID": "00",
-        "Season": "2025-26"
-    },
-    "resultSets": [
+  "leagueId": "00",
+  "seasonYear": "2025-26",
+  "unixTimeStamp": 1770900442,
+  "timeStampUtc": "2026-02-12T12:47:22.12",
+  "teams": [
+    {
+      "teamId": 1610612737,
+      "teamCity": "Atlanta",
+      "teamName": "Hawks",
+      "teamAbbreviation": "ATL",
+      "teamSlug": "hawks",
+      "conference": "East",
+      "istGroup": "East Group A",
+      "clinchIndicator": " -o",
+      "clinchedIstKnockout": 0,
+      "clinchedIstGroup": 0,
+      "clinchedIstWildcard": 0,
+      "istWildcardRank": 5,
+      "istGroupRank": 2,
+      "istKnockoutRank": null,
+      "wins": 2,
+      "losses": 2,
+      "pct": 0.5,
+      "istGroupGb": 2.0,
+      "istWildcardGb": 1.0,
+      "diff": -4,
+      "pts": 468,
+      "oppPts": 472,
+      "games": [
         {
-            "name": "Standings",
-            "headers": [
-                "LeagueId",
-                "SeasonID",
-                "TeamID",
-                "TeamCity",
-                "TeamName",
-                "TeamAbbreviation",
-                "Conference",
-                "Group",
-                "PlayoffRank",
-                "W",
-                "L",
-                "W_PCT",
-                "HOME",
-                "ROAD",
-                "OT",
-                "LAST10",
-                "STREAK",
-                "ConferenceRecord",
-                "DivisionRecord",
-                "GroupRecord",
-                "ClinchedPlayoff",
-                "ClinchedPlayIn",
-                "ClinchedConference",
-                "ClinchedDivision",
-                "ClinchedGroup",
-                "EliminatedPlayoff",
-                "EliminatedPlayIn",
-                "EliminatedConference",
-                "EliminatedDivision",
-                "EliminatedGroup"
-            ],
-            "rowSet": [
-                [
-                    "00",
-                    "22023",
-                    1610612747,
-                    "Los Angeles",
-                    "Lakers",
-                    "LAL",
-                    "West",
-                    "West Group A",
-                    1,
-                    4,
-                    0,
-                    1.0,
-                    "2-0",
-                    "2-0",
-                    "0-0",
-                    "4-0",
-                    "W 4",
-                    "4-0",
-                    "4-0",
-                    "4-0",
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ]
-            ]
+          "gameId": "0022500020",
+          "gameNumber": 1,
+          "opponentTeamAbbreviation": "IND",
+          "location": "A",
+          "gameStatus": 3,
+          "gameStatusText": "Final",
+          "outcome": "W"
         }
-    ]
-}`
-
-var SampleInvalidIstStandingsResponse = `{
-    "resource": "iststandings",
-    "parameters": {
-        "LeagueID": "00",
-        "Season": "2025-26"
-    },
-    "resultSets": [
-        "hello",
-    ]
+      ]
+    }
+  ]
 }`

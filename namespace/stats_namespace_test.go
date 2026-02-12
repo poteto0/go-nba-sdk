@@ -62,7 +62,8 @@ func Test_Stats_GetIstStandings(t *testing.T) {
 		// Act
 		result := sn.GetIstStandings(&types.IstStandingsParams{
 			LeagueID: "00",
-			Season:   "2025-26",
+			Season:   "2023-24",
+			Section:  "group",
 		})
 
 		// Assert
