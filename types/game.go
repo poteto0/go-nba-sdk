@@ -39,6 +39,24 @@ func (g *Game) IsFinished() bool {
 	return g.GameStatus == 3
 }
 
+// IsGameStart returns true if the game has started.
+func (g *Game) IsGameStart() bool {
+	return g.GameStatus != 1
+}
+
+// IsOverTime returns true if the game is in overtime.
+func (g *Game) IsOverTime() bool {
+	return g.Period > 4
+}
+
+// OverTimeNum returns the number of overtime periods.
+func (g *Game) OverTimeNum() int {
+	if g.IsOverTime() {
+		return g.Period - 4
+	}
+	return 0
+}
+
 // parse clock
 // PT07M11.01S -> 07:11.01
 func (g *Game) Clock() string {
