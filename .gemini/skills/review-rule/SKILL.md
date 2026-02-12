@@ -22,6 +22,12 @@ description: Guidelines for scoring and conducting code reviews.
     -   Public interfaces not adhering to project standards.
 -   **-5**: **Not DRY (Don't Repeat Yourself)**.
     -   Duplicate logic or hardcoded values.
--   **-3**: **UT (Unit Test) Not Covered**.
-    -   New code lacks corresponding tests.
-    -   Existing tests fail.
+-   **UT Coverage Deductions**:
+    -   Check line-level coverage for each modified file using: `just ut-cov <path> && go tool cover -func=coverage.out | grep <filename>`
+    -   Deduct points for **each file** based on its line coverage:
+        -   `< 95%`: **-1**
+        -   `< 90%`: **-3**
+        -   `< 85%`: **-4**
+        -   `< 80%`: **-5**
+        -   `< 75%`: **-10**
+    -   **Note**: Existing tests must pass, and new code must be covered.
