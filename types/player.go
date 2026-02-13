@@ -1,7 +1,5 @@
 package types
 
-import "github.com/moznion/go-optional"
-
 type Player struct {
 	Status     string `json:"status"`
 	Order      int    `json:"order"`
@@ -16,7 +14,7 @@ type Player struct {
 	FamilyName string `json:"familyName"`
 
 	// if requested box score
-	Statistics optional.Option[PlayerBoxScoreStatistic] `json:"statistics"`
+	Statistics *PlayerBoxScoreStatistic `json:"statistics"`
 }
 
 func (p Player) IsStarter() bool {

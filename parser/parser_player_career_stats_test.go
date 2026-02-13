@@ -128,17 +128,17 @@ func TestParsePlayerCareerStatsResponse(t *testing.T) {
 		assert.Equal(t, "2012-13", stats.SeasonID)
 
 		// Optional fields
-		v, _ := stats.GP.Take()
-		assert.Equal(t, 64, v)
+		assert.NotNil(t, stats.GP)
+		assert.Equal(t, 64, *stats.GP)
 
-		v, _ = stats.GS.Take()
-		assert.Equal(t, 60, v)
+		assert.NotNil(t, stats.GS)
+		assert.Equal(t, 60, *stats.GS)
 
-		f, _ := stats.Min.Take()
-		assert.Equal(t, 28.8, f)
+		assert.NotNil(t, stats.Min)
+		assert.Equal(t, 28.8, *stats.Min)
 
-		f, _ = stats.Pts.Take()
-		assert.Equal(t, 13.5, f)
+		assert.NotNil(t, stats.Pts)
+		assert.Equal(t, 13.5, *stats.Pts)
 
 		careerStats := result.CareerTotalsRegularSeason[0]
 		assert.Equal(t, 203076, careerStats.PlayerID)
@@ -173,11 +173,11 @@ func TestParsePlayerCareerStatsResponse(t *testing.T) {
 		assert.Equal(t, "00", collegeStats.LeagueID)
 
 		// Optional fields
-		v2, _ := collegeStats.GP.Take()
-		assert.Equal(t, 40, v2)
+		assert.NotNil(t, collegeStats.GP)
+		assert.Equal(t, 40, *collegeStats.GP)
 
-		f2, _ := collegeStats.Pts.Take()
-		assert.Equal(t, 14.2, f2)
+		assert.NotNil(t, collegeStats.Pts)
+		assert.Equal(t, 14.2, *collegeStats.Pts)
 
 		careerCollegeStats := result.CareerTotalsCollegeSeason[0]
 		assert.Equal(t, 203076, careerCollegeStats.PlayerID)
@@ -283,11 +283,11 @@ func TestParsePlayerCareerStatsResponse(t *testing.T) {
 
 		rankings := result.SeasonRankingsRegularSeason[0]
 
-		assert.True(t, rankings.RankPgMin.IsNone())
-		assert.True(t, rankings.RankPgPts.IsNone())
+		assert.Nil(t, rankings.RankPgMin)
+		assert.Nil(t, rankings.RankPgPts)
 
-		v, _ := rankings.RankPgReb.Take()
-		assert.Equal(t, 85, v)
+		assert.NotNil(t, rankings.RankPgReb)
+		assert.Equal(t, 85, *rankings.RankPgReb)
 	})
 
 	t.Run("should handle missing stats values as none", func(t *testing.T) {
@@ -313,7 +313,7 @@ func TestParsePlayerCareerStatsResponse(t *testing.T) {
 		assert.NoError(t, err)
 
 		stats := result.SeasonTotalsRegularSeason[0]
-		assert.True(t, stats.GP.IsNone())
-		assert.True(t, stats.Min.IsNone())
+		assert.Nil(t, stats.GP)
+		assert.Nil(t, stats.Min)
 	})
 }

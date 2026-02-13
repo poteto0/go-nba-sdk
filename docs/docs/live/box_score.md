@@ -29,20 +29,32 @@ func main() {
 
 	fmt.Printf("=============== %s ==================\n", homeTeam.TeamTricode)
 
-	players, _ := homeTeam.Players.Take()
-	for _, player := range players {
-		stats, _ := player.Statistics.Take()
-		pts, _ := stats.Pts.Take()
-		ast, _ := stats.Ast.Take()
-		reb, _ := stats.Reb.Take()
+	if homeTeam.Players != nil {
+		for _, player := range *homeTeam.Players {
+			if player.Statistics != nil {
+				stats := player.Statistics
+				pts := 0
+				if stats.Pts != nil {
+					pts = *stats.Pts
+				}
+				ast := 0
+				if stats.Ast != nil {
+					ast = *stats.Ast
+				}
+				reb := 0
+				if stats.Reb != nil {
+					reb = *stats.Reb
+				}
 
-		fmt.Printf(
-			"%s: %d pts/ %d ast/ %d reb\n",
-			player.NameI,
-			pts,
-			ast,
-			reb,
-		)
+				fmt.Printf(
+					"%s: %d pts/ %d ast/ %d reb\n",
+					player.NameI,
+					pts,
+					ast,
+					reb,
+				)
+			}
+		}
 	}
 }
 ```
@@ -84,3 +96,5 @@ type BoxScoreParams struct {
 ### Response
 
 [`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/response_live_box_score.go)
+
+```

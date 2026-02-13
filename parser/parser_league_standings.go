@@ -120,15 +120,15 @@ func parseLeagueStandingsRecords(
 			case "DivisionGamesBack":
 				record.DivisionGamesBack = toFloat(row[j])
 			case "ClinchedConferenceTitle":
-				record.ClinchedConferenceTitle = toOptionalString(row[j])
+				record.ClinchedConferenceTitle = toPtrString(row[j])
 			case "ClinchedDivisionTitle":
-				record.ClinchedDivisionTitle = toOptionalString(row[j])
+				record.ClinchedDivisionTitle = toPtrString(row[j])
 			case "ClinchedPlayoffBirth":
-				record.ClinchedPlayoffBirth = toOptionalString(row[j])
+				record.ClinchedPlayoffBirth = toPtrString(row[j])
 			case "EliminatedConference":
-				record.EliminatedConference = toOptionalString(row[j])
+				record.EliminatedConference = toPtrString(row[j])
 			case "EliminatedDivision":
-				record.EliminatedDivision = toOptionalString(row[j])
+				record.EliminatedDivision = toPtrString(row[j])
 			case "AheadAtHalf":
 				record.AheadAtHalf = row[j].(string)
 			case "BehindAtHalf":
@@ -176,33 +176,33 @@ func parseLeagueStandingsRecords(
 			case "vsSouthwest":
 				record.VsSouthwest = row[j].(string)
 			case "Jan":
-				record.Jan = toOptionalString(row[j])
+				record.Jan = toPtrString(row[j])
 			case "Feb":
-				record.Feb = toOptionalString(row[j])
+				record.Feb = toPtrString(row[j])
 			case "Mar":
-				record.Mar = toOptionalString(row[j])
+				record.Mar = toPtrString(row[j])
 			case "Apr":
-				record.Apr = toOptionalString(row[j])
+				record.Apr = toPtrString(row[j])
 			case "May":
-				record.May = toOptionalString(row[j])
+				record.May = toPtrString(row[j])
 			case "Jun":
-				record.Jun = toOptionalString(row[j])
+				record.Jun = toPtrString(row[j])
 			case "Jul":
-				record.Jul = toOptionalString(row[j])
+				record.Jul = toPtrString(row[j])
 			case "Aug":
-				record.Aug = toOptionalString(row[j])
+				record.Aug = toPtrString(row[j])
 			case "Sep":
-				record.Sep = toOptionalString(row[j])
+				record.Sep = toPtrString(row[j])
 			case "Oct":
-				record.Oct = toOptionalString(row[j])
+				record.Oct = toPtrString(row[j])
 			case "Nov":
-				record.Nov = toOptionalString(row[j])
+				record.Nov = toPtrString(row[j])
 			case "Dec":
-				record.Dec = toOptionalString(row[j])
+				record.Dec = toPtrString(row[j])
 			case "PreAS":
-				record.PreAS = toOptionalString(row[j])
+				record.PreAS = toPtrString(row[j])
 			case "PostAS":
-				record.PostAS = toOptionalString(row[j])
+				record.PostAS = toPtrString(row[j])
 			}
 		}
 		records[i] = record

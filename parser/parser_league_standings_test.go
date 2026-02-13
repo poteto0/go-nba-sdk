@@ -75,28 +75,24 @@ func TestParseLeagueStandingsResponse(t *testing.T) {
 		assert.Equal(t, 120.0, record.PointsPG)
 
 		// Check optional fields
-		v, err := record.ClinchedConferenceTitle.Take()
-		assert.NoError(t, err)
-		assert.Equal(t, "Title", v)
+		assert.NotNil(t, record.ClinchedConferenceTitle)
+		assert.Equal(t, "Title", *record.ClinchedConferenceTitle)
 
-		assert.True(t, record.ClinchedDivisionTitle.IsNone())
+		assert.Nil(t, record.ClinchedDivisionTitle)
 
-		v, err = record.ClinchedPlayoffBirth.Take()
-		assert.NoError(t, err)
-		assert.Equal(t, "Birth", v)
+		assert.NotNil(t, record.ClinchedPlayoffBirth)
+		assert.Equal(t, "Birth", *record.ClinchedPlayoffBirth)
 
 		// Check monthly/break fields
-		v, err = record.Jan.Take()
-		assert.NoError(t, err)
-		assert.Equal(t, "9-6", v)
+		assert.NotNil(t, record.Jan)
+		assert.Equal(t, "9-6", *record.Jan)
 
-		assert.True(t, record.Mar.IsNone())
+		assert.Nil(t, record.Mar)
 
-		v, err = record.PreAS.Take()
-		assert.NoError(t, err)
-		assert.Equal(t, "42-13", v)
+		assert.NotNil(t, record.PreAS)
+		assert.Equal(t, "42-13", *record.PreAS)
 
-		assert.True(t, record.PostAS.IsNone())
+		assert.Nil(t, record.PostAS)
 	})
 
 	t.Run("unexpected resource is error", func(t *testing.T) {

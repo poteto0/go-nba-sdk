@@ -63,15 +63,15 @@ type LeagueStandingsParams struct {
 
 [`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/response_league_standings.go)
 
-- Nullable fields return `optional.Option[string]`.
+- Nullable fields are represented as pointers.
 
   ```go
   result := stats.GetLeagueStandings(client, types.LeagueStandingsParams{})
 
   for _, team := range result.Contents.Standings {
   	// Example of handling nullable field
-  	if v, err := team.ClinchedPlayoffBirth.Take(); err == nil {
-  		fmt.Printf("Clinched: %s\n", v)
+  	if team.ClinchedPlayoffBirth != nil {
+  		fmt.Printf("Clinched: %s\n", *team.ClinchedPlayoffBirth)
   	}
   }
   ```

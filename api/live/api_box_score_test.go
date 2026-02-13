@@ -40,11 +40,11 @@ func Test_GetBoxScore(t *testing.T) {
 		game := result.Contents.Game
 		assert.Equal(t, "0022500733", game.GameId)
 
-		arena, _ := game.Arena.Take()
-		assert.Equal(t, "Little Caesars Arena", arena.ArenaName)
+		assert.NotNil(t, game.Arena)
+		assert.Equal(t, "Little Caesars Arena", game.Arena.ArenaName)
 
-		officials, _ := game.Officials.Take()
-		assert.Equal(t, 1, len(officials))
+		assert.NotNil(t, game.Officials)
+		assert.Equal(t, 1, len(*game.Officials))
 
 		homeTeam := game.HomeTeam
 		assert.Equal(t, homeTeam.TeamId, 1610612765)
@@ -52,21 +52,21 @@ func Test_GetBoxScore(t *testing.T) {
 		periods := homeTeam.Periods
 		assert.Equal(t, 4, len(periods))
 
-		players, _ := homeTeam.Players.Take()
-		assert.Equal(t, 1, len(players))
+		assert.NotNil(t, homeTeam.Players)
+		assert.Equal(t, 1, len(*homeTeam.Players))
 
-		player := players[0]
+		player := (*homeTeam.Players)[0]
 		assert.Equal(t, "Ausar Thompson", player.Name)
 
-		playerStats, _ := player.Statistics.Take()
-		pts, _ := playerStats.Pts.Take()
-		assert.Equal(t, 13, pts)
-		plus, _ := playerStats.Plus.Take()
-		assert.Equal(t, 79.0, plus)
+		assert.NotNil(t, player.Statistics)
+		assert.NotNil(t, player.Statistics.Pts)
+		assert.Equal(t, 13, *player.Statistics.Pts)
+		assert.NotNil(t, player.Statistics.Plus)
+		assert.Equal(t, 79.0, *player.Statistics.Plus)
 
-		teamStats, _ := homeTeam.Statistics.Take()
-		pts, _ = teamStats.Pts.Take()
-		assert.Equal(t, 117, pts)
+		assert.NotNil(t, homeTeam.Statistics)
+		assert.NotNil(t, homeTeam.Statistics.Pts)
+		assert.Equal(t, 117, *homeTeam.Statistics.Pts)
 	})
 
 	t.Run("network error is w/o status code", func(t *testing.T) {
