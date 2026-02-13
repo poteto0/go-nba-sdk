@@ -14,6 +14,7 @@ This skill defines the end-to-end development process for all tasks. Adhere stri
 1.  **TDD Development**:
     - Always follow the `test-driven-development` skill.
     - Write a failing test before any production code.
+    - use `go-development` skill for latest golang features.
 2.  **CI Check**:
     - Run `just ci` to ensure all checks (lint, tests, etc.) pass locally.
 3.  **Code Review**:
