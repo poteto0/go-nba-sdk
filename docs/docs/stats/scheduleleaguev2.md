@@ -1,4 +1,4 @@
---- 
+---
 sidebar_position: 5
 ---
 
@@ -11,10 +11,12 @@ get schedules of the league
 ```go title="main.go"
 func main() {
 	client := gns.NewClient(nil)
-	result := client.Stats.GetScheduleLeagueV2(&types.ScheduleLeagueV2Params{
-		LeagueID: "00",
-		Season:   "2024-25",
-	})
+	result := client.Stats.GetScheduleLeagueV2(
+		&types.ScheduleLeagueV2Params{
+			LeagueID: "00",
+			Season:   "2025-26",
+		}, // or nil
+	)
 
 	if result.Error != nil {
 		panic(result.Error)
@@ -34,6 +36,22 @@ func main() {
 }
 ```
 
+output
+
+```
+...
+Date: 06/08/2026 00:00:00
+  Game:  vs , Status: 8:30 pm ET
+Date: 06/10/2026 00:00:00
+  Game:  vs , Status: 8:30 pm ET
+Date: 06/13/2026 00:00:00
+  Game:  vs , Status: 8:30 pm ET
+Date: 06/16/2026 00:00:00
+  Game:  vs , Status: 8:30 pm ET
+Date: 06/19/2026 00:00:00
+  Game:  vs , Status: 8:30 pm ET
+```
+
 ## 📜 Details
 
 ### Arg
@@ -51,5 +69,3 @@ type ScheduleLeagueV2Params struct {
 ### Response
 
 [`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/response_schedule_league_v2.go)
-
-```
