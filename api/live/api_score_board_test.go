@@ -33,6 +33,27 @@ func Test_GetScoreBoard(t *testing.T) {
 		assert.Equal(t, 200, result.Contents.Meta.Code)
 	})
 
+	t.Run("network error is w/o status code", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.LiveBaseUrl+constants.ScoreBoardPath+"/todaysScoreboard_00.json",
+			httpmock.NewErrorResponder(assert.AnError),
+		)
+
+		// Arrange
+		provider := newProviderForTest()
+
+		// Act
+		result := live.GetScoreBoard(provider, nil)
+
+		// Assert
+		assert.Error(t, result.Error)
+		assert.Equal(t, 0, result.StatusCode)
+	})
+
 	t.Run("response parse error w/ http status code", func(t *testing.T) {
 		httpmock.Activate(t)
 		defer httpmock.DeactivateAndReset()

@@ -69,6 +69,29 @@ func Test_GetBoxScore(t *testing.T) {
 		assert.Equal(t, 117, pts)
 	})
 
+	t.Run("network error is w/o status code", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.LiveBaseUrl+constants.BoxScorePath+"/boxscore_0022500733.json",
+			httpmock.NewErrorResponder(assert.AnError),
+		)
+
+		// Arrange
+		provider := newProviderForTest()
+
+		// Act
+		result := live.GetBoxScore(provider, &types.BoxScoreParams{
+			GameID: "0022500733",
+		})
+
+		// Assert
+		assert.Error(t, result.Error)
+		assert.Equal(t, 0, result.StatusCode)
+	})
+
 	t.Run("response parse error w/ http status code", func(t *testing.T) {
 		httpmock.Activate(t)
 		defer httpmock.DeactivateAndReset()

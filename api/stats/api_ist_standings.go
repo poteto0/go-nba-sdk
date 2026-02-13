@@ -38,7 +38,9 @@ func GetIstStandings(provider api.IProvider, params *types.IstStandingsParams) t
 	path := constants.StatsBaseUrl + constants.IstStandingsPath
 	v, err := query.Values(params)
 	if err != nil {
-		return types.Response[types.IstStandingsResponseContent]{Error: err}
+		return types.Response[types.IstStandingsResponseContent]{
+			Error: err,
+		}
 	}
 
 	path = path + "?" + v.Encode()
@@ -46,8 +48,7 @@ func GetIstStandings(provider api.IProvider, params *types.IstStandingsParams) t
 	resp, err := provider.Get(path, nil)
 	if err != nil {
 		return types.Response[types.IstStandingsResponseContent]{
-			StatusCode: resp.StatusCode,
-			Error:      err,
+			Error: err,
 		}
 	}
 	defer resp.Body.Close()

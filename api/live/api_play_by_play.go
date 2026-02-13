@@ -18,8 +18,7 @@ func GetPlayByPlay(provider api.IProvider, params *types.PlayByPlayParams) types
 	resp, err := provider.Get(path, &constants.DefaultLiveStatsHeaders)
 	if err != nil {
 		return types.Response[types.LivePlayByPlayResponse]{
-			StatusCode: resp.StatusCode,
-			Error:      err,
+			Error: err,
 		}
 	}
 	defer resp.Body.Close()
