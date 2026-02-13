@@ -63,6 +63,27 @@ func Test_GetIstStandings(t *testing.T) {
 		assert.Equal(t, "Hawks", result.Contents.Teams[0].TeamName)
 	})
 
+	t.Run("network error is w/o status code", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		path := constants.StatsBaseUrl + constants.IstStandingsPath + "?LeagueID=00&Season=2025-26&Section=group"
+		httpmock.RegisterResponder(
+			"GET",
+			path,
+			httpmock.NewErrorResponder(assert.AnError),
+		)
+
+		provider := newProviderForTest()
+
+		// Act
+		result := stats.GetIstStandings(provider, nil)
+
+		// Assert
+		assert.NotNil(t, result.Error)
+		assert.Equal(t, 0, result.StatusCode)
+	})
+
 	t.Run("response parse error w/ http status code", func(t *testing.T) {
 		httpmock.Activate(t)
 		defer httpmock.DeactivateAndReset()

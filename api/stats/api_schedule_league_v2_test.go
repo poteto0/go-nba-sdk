@@ -108,6 +108,25 @@ func Test_GetScheduleLeagueV2(t *testing.T) {
 		assert.Equal(t, 200, result.StatusCode)
 	})
 
+	t.Run("network error is w/o status code", func(t *testing.T) {
+		httpmock.Activate()
+		defer httpmock.DeactivateAndReset()
+
+		path := constants.StatsBaseUrl + constants.ScheduleLeagueV2Path + "?LeagueID=00&Season=2025-26"
+		httpmock.RegisterResponder(
+			"GET",
+			path,
+			httpmock.NewErrorResponder(assert.AnError),
+		)
+
+		provider := newProviderForTest()
+
+		result := stats.GetScheduleLeagueV2(provider, nil)
+
+		assert.NotNil(t, result.Error)
+		assert.Equal(t, 0, result.StatusCode)
+	})
+
 	t.Run("error handling", func(t *testing.T) {
 		httpmock.Activate()
 		defer httpmock.DeactivateAndReset()

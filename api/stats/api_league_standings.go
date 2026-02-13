@@ -47,8 +47,7 @@ func GetLeagueStandings(provider api.IProvider, params *types.LeagueStandingsPar
 	resp, err := provider.Get(path, &constants.DefaultStatsHeaders)
 	if err != nil {
 		return types.Response[types.LeagueStandingsResponseContent]{
-			StatusCode: resp.StatusCode,
-			Error:      err,
+			Error: err,
 		}
 	}
 	defer resp.Body.Close()

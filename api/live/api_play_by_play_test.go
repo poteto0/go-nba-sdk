@@ -48,6 +48,29 @@ func Test_GetPlayByPlay(t *testing.T) {
 		assert.Equal(t, "Period Start", action.Description)
 	})
 
+	t.Run("network error is w/o status code", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.LiveBaseUrl+constants.PlayByPlayPath+"/playbyplay_0022000001.json",
+			httpmock.NewErrorResponder(assert.AnError),
+		)
+
+		// Arrange
+		provider := newProviderForTest()
+
+		// Act
+		result := live.GetPlayByPlay(provider, &types.PlayByPlayParams{
+			GameID: "0022000001",
+		})
+
+		// Assert
+		assert.Error(t, result.Error)
+		assert.Equal(t, 0, result.StatusCode)
+	})
+
 	t.Run("response parse error w/ http status code", func(t *testing.T) {
 		httpmock.Activate(t)
 		defer httpmock.DeactivateAndReset()

@@ -42,8 +42,7 @@ func GetPlayerCareerStats(provider api.IProvider, params *types.PlayerCareerStat
 	resp, err := provider.Get(path, nil)
 	if err != nil {
 		return types.Response[types.PlayerCareerStatsResponseContent]{
-			StatusCode: resp.StatusCode,
-			Error:      err,
+			Error: err,
 		}
 	}
 	defer resp.Body.Close()
