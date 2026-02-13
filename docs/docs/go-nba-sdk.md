@@ -23,15 +23,9 @@ result := client.Stats.GetPlayerCareerStats(&types.PlayerCareerStatsParams{
 
 Can be used without being aware of the web API layer.
 
-### :lock: nil-safe result
+### :lock: Pointer-based optional fields
 
-:::note
-
-Dependent on the following library;
-
-https://github.com/moznion/go-optional
-
-:::
+Nullable fields in response structs are represented as pointers.
 
 ```go
 client := gns.NewClient(nil)
@@ -41,10 +35,11 @@ result := client.Stats.GetPlayerCareerStats(&types.PlayerCareerStatsParams{
 
 fmt.Println("======================= RS ==========================")
 for _, content := range result.Contents.SeasonTotalsRegularSeason {
-	pts, _ := content.Pts.Take()
-	fmt.Printf("Season: %s, PPG: %.2f\n",
-		content.SeasonID,
-		pts,
-	)
+	if content.Pts != nil {
+		fmt.Printf("Season: %s, PPG: %.2f\n",
+			content.SeasonID,
+			*content.Pts,
+		)
+	}
 }
 ```

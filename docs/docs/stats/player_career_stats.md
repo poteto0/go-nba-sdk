@@ -16,7 +16,10 @@ func main() {
 	/* ⇊ Example ⇊ */
 	fmt.Println("======================= RS ==========================")
 	for _, content := range result.Contents.SeasonTotalsRegularSeason {
-		pts, _ := content.Pts.Take()
+		pts := 0.0
+		if content.Pts != nil {
+			pts = *content.Pts
+		}
 		fmt.Printf("Season: %s, PPG: %.2f\n",
 			content.SeasonID,
 			pts,
@@ -25,16 +28,22 @@ func main() {
 
 	fmt.Println("======================= PO ==========================")
 	for _, content := range result.Contents.SeasonTotalsPostSeason {
-		pts, _ := content.Pts.Take()
+		pts := 0.0
+		if content.Pts != nil {
+			pts = *content.Pts
+		}
 		fmt.Printf("Season: %s, PPG: %.2f\n",
 			content.SeasonID,
 			pts,
 		)
 	}
 
-	fmt.Println("======================= COLLEGE ==========================")
+	fmt.Println("======================= COLLEGE =========================")
 	for _, content := range result.Contents.SeasonTotalsCollegeSeason {
-		pts, _ := content.Pts.Take()
+		pts := 0.0
+		if content.Pts != nil {
+			pts = *content.Pts
+		}
 		fmt.Printf("Season: %s, PPG: %.2f\n",
 			content.SeasonID,
 			pts,
@@ -44,17 +53,16 @@ func main() {
 	fmt.Println("======================= RANK ==============================")
 	for _, content := range result.Contents.SeasonRankingsRegularSeason {
 
-		if content.RankPgPts.IsNone() {
+		if content.RankPgPts == nil {
 			fmt.Printf("Season: %s, PPG Rank: -\n",
 				content.SeasonID,
 			)
 			continue
 		}
 
-		v, _ := content.RankPgPts.Take()
 		fmt.Printf("Season: %s, PPG Rank: %d\n",
 			content.SeasonID,
-			v,
+			*content.RankPgPts,
 		)
 	}
 }
@@ -81,7 +89,7 @@ type PlayerCareerStatsParams struct {
 
 [`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/player_career_stats.go)
 
-- Many columns return gooptional.
+- Nullable columns return pointers.
 
   ```go
   result := stats.GetPlayerCareerStats(client, types.PlayerCareerStatsParams{
@@ -90,6 +98,8 @@ type PlayerCareerStatsParams struct {
 
   for _, content := range result.Contents.SeasonTotalsRegularSeason {
   	// check if pts is present or not
-  	pts, err := content.Pts.Take()
+  	if content.Pts != nil {
+  		pts := *content.Pts
+  	}
   }
   ```

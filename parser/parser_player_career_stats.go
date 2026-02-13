@@ -94,47 +94,47 @@ func parsePlayerCareerStatsRecords(
 			case "PLAYER_AGE":
 				record.PlayerAge = toInt(row[j])
 			case "GP":
-				record.GP = toOptionalInt(row[j])
+				record.GP = toPtrInt(row[j])
 			case "GS":
-				record.GS = toOptionalInt(row[j])
+				record.GS = toPtrInt(row[j])
 			case "MIN":
-				record.Min = toOptionalFloat(row[j])
+				record.Min = toPtrFloat(row[j])
 			case "PTS":
-				record.Pts = toOptionalFloat(row[j])
+				record.Pts = toPtrFloat(row[j])
 			case "FGM":
-				record.FgM = toOptionalFloat(row[j])
+				record.FgM = toPtrFloat(row[j])
 			case "FGA":
-				record.FgA = toOptionalFloat(row[j])
+				record.FgA = toPtrFloat(row[j])
 			case "FG_PCT":
-				record.FgPct = toOptionalFloat(row[j])
+				record.FgPct = toPtrFloat(row[j])
 			case "FG3M":
-				record.Fg3M = toOptionalFloat(row[j])
+				record.Fg3M = toPtrFloat(row[j])
 			case "FG3A":
-				record.Fg3A = toOptionalFloat(row[j])
+				record.Fg3A = toPtrFloat(row[j])
 			case "FG3_PCT":
-				record.Fg3Pct = toOptionalFloat(row[j])
+				record.Fg3Pct = toPtrFloat(row[j])
 			case "FTM":
-				record.FtM = toOptionalFloat(row[j])
+				record.FtM = toPtrFloat(row[j])
 			case "FTA":
-				record.FtA = toOptionalFloat(row[j])
+				record.FtA = toPtrFloat(row[j])
 			case "FT_PCT":
-				record.FtPct = toOptionalFloat(row[j])
+				record.FtPct = toPtrFloat(row[j])
 			case "OREB":
-				record.OReb = toOptionalFloat(row[j])
+				record.OReb = toPtrFloat(row[j])
 			case "DREB":
-				record.DReb = toOptionalFloat(row[j])
+				record.DReb = toPtrFloat(row[j])
 			case "REB":
-				record.Reb = toOptionalFloat(row[j])
+				record.Reb = toPtrFloat(row[j])
 			case "AST":
-				record.Ast = toOptionalFloat(row[j])
+				record.Ast = toPtrFloat(row[j])
 			case "STL":
-				record.Stl = toOptionalFloat(row[j])
+				record.Stl = toPtrFloat(row[j])
 			case "BLK":
-				record.Blk = toOptionalFloat(row[j])
+				record.Blk = toPtrFloat(row[j])
 			case "TOV":
-				record.Tov = toOptionalFloat(row[j])
+				record.Tov = toPtrFloat(row[j])
 			case "PF":
-				record.PF = toOptionalFloat(row[j])
+				record.PF = toPtrFloat(row[j])
 			}
 		}
 		records[i] = record
@@ -162,47 +162,47 @@ func parsePlayerSeasonCollegeStatsRecords(
 			case "SCHOOL_NAME":
 				record.SchoolName = row[j].(string)
 			case "GP":
-				record.GP = toOptionalInt(row[j])
+				record.GP = toPtrInt(row[j])
 			case "GS":
-				record.GS = toOptionalInt(row[j])
+				record.GS = toPtrInt(row[j])
 			case "MIN":
-				record.Min = toOptionalFloat(row[j])
+				record.Min = toPtrFloat(row[j])
 			case "PTS":
-				record.Pts = toOptionalFloat(row[j])
+				record.Pts = toPtrFloat(row[j])
 			case "FGM":
-				record.FgM = toOptionalFloat(row[j])
+				record.FgM = toPtrFloat(row[j])
 			case "FGA":
-				record.FgA = toOptionalFloat(row[j])
+				record.FgA = toPtrFloat(row[j])
 			case "FG_PCT":
-				record.FgPct = toOptionalFloat(row[j])
+				record.FgPct = toPtrFloat(row[j])
 			case "FG3M":
-				record.Fg3M = toOptionalFloat(row[j])
+				record.Fg3M = toPtrFloat(row[j])
 			case "FG3A":
-				record.Fg3A = toOptionalFloat(row[j])
+				record.Fg3A = toPtrFloat(row[j])
 			case "FG3_PCT":
-				record.Fg3Pct = toOptionalFloat(row[j])
+				record.Fg3Pct = toPtrFloat(row[j])
 			case "FTM":
-				record.FtM = toOptionalFloat(row[j])
+				record.FtM = toPtrFloat(row[j])
 			case "FTA":
-				record.FtA = toOptionalFloat(row[j])
+				record.FtA = toPtrFloat(row[j])
 			case "FT_PCT":
-				record.FtPct = toOptionalFloat(row[j])
+				record.FtPct = toPtrFloat(row[j])
 			case "OREB":
-				record.OReb = toOptionalFloat(row[j])
+				record.OReb = toPtrFloat(row[j])
 			case "DREB":
-				record.DReb = toOptionalFloat(row[j])
+				record.DReb = toPtrFloat(row[j])
 			case "REB":
-				record.Reb = toOptionalFloat(row[j])
+				record.Reb = toPtrFloat(row[j])
 			case "AST":
-				record.Ast = toOptionalFloat(row[j])
+				record.Ast = toPtrFloat(row[j])
 			case "STL":
-				record.Stl = toOptionalFloat(row[j])
+				record.Stl = toPtrFloat(row[j])
 			case "BLK":
-				record.Blk = toOptionalFloat(row[j])
+				record.Blk = toPtrFloat(row[j])
 			case "TOV":
-				record.Tov = toOptionalFloat(row[j])
+				record.Tov = toPtrFloat(row[j])
 			case "PF":
-				record.PF = toOptionalFloat(row[j])
+				record.PF = toPtrFloat(row[j])
 			}
 		}
 		records[i] = record
@@ -226,47 +226,47 @@ func parsePlayerCareerCollegeStatsRecords(
 			case "ORGANIZATION_ID":
 				record.OrganizationID = toInt(row[j])
 			case "GP":
-				record.GP = toOptionalInt(row[j])
+				record.GP = toPtrInt(row[j])
 			case "GS":
-				record.GS = toOptionalInt(row[j])
+				record.GS = toPtrInt(row[j])
 			case "MIN":
-				record.Min = toOptionalFloat(row[j])
+				record.Min = toPtrFloat(row[j])
 			case "PTS":
-				record.Pts = toOptionalFloat(row[j])
+				record.Pts = toPtrFloat(row[j])
 			case "FGM":
-				record.FgM = toOptionalFloat(row[j])
+				record.FgM = toPtrFloat(row[j])
 			case "FGA":
-				record.FgA = toOptionalFloat(row[j])
+				record.FgA = toPtrFloat(row[j])
 			case "FG_PCT":
-				record.FgPct = toOptionalFloat(row[j])
+				record.FgPct = toPtrFloat(row[j])
 			case "FG3M":
-				record.Fg3M = toOptionalFloat(row[j])
+				record.Fg3M = toPtrFloat(row[j])
 			case "FG3A":
-				record.Fg3A = toOptionalFloat(row[j])
+				record.Fg3A = toPtrFloat(row[j])
 			case "FG3_PCT":
-				record.Fg3Pct = toOptionalFloat(row[j])
+				record.Fg3Pct = toPtrFloat(row[j])
 			case "FTM":
-				record.FtM = toOptionalFloat(row[j])
+				record.FtM = toPtrFloat(row[j])
 			case "FTA":
-				record.FtA = toOptionalFloat(row[j])
+				record.FtA = toPtrFloat(row[j])
 			case "FT_PCT":
-				record.FtPct = toOptionalFloat(row[j])
+				record.FtPct = toPtrFloat(row[j])
 			case "OREB":
-				record.OReb = toOptionalFloat(row[j])
+				record.OReb = toPtrFloat(row[j])
 			case "DREB":
-				record.DReb = toOptionalFloat(row[j])
+				record.DReb = toPtrFloat(row[j])
 			case "REB":
-				record.Reb = toOptionalFloat(row[j])
+				record.Reb = toPtrFloat(row[j])
 			case "AST":
-				record.Ast = toOptionalFloat(row[j])
+				record.Ast = toPtrFloat(row[j])
 			case "STL":
-				record.Stl = toOptionalFloat(row[j])
+				record.Stl = toPtrFloat(row[j])
 			case "BLK":
-				record.Blk = toOptionalFloat(row[j])
+				record.Blk = toPtrFloat(row[j])
 			case "TOV":
-				record.Tov = toOptionalFloat(row[j])
+				record.Tov = toPtrFloat(row[j])
 			case "PF":
-				record.PF = toOptionalFloat(row[j])
+				record.PF = toPtrFloat(row[j])
 			}
 		}
 		records[i] = record
@@ -294,43 +294,43 @@ func parsePlayerCareerRankingsRecords(
 			case "TEAM_ABBREVIATION":
 				record.TeamAbbeviation = row[j].(string)
 			case "RANK_PG_MIN":
-				record.RankPgMin = toOptionalInt(row[j])
+				record.RankPgMin = toPtrInt(row[j])
 			case "RANK_PG_PTS":
-				record.RankPgPts = toOptionalInt(row[j])
+				record.RankPgPts = toPtrInt(row[j])
 			case "RANK_PG_OREB":
-				record.RankPgOReb = toOptionalInt(row[j])
+				record.RankPgOReb = toPtrInt(row[j])
 			case "RANK_PG_DREB":
-				record.RankPgDReb = toOptionalInt(row[j])
+				record.RankPgDReb = toPtrInt(row[j])
 			case "RANK_PG_REB":
-				record.RankPgReb = toOptionalInt(row[j])
+				record.RankPgReb = toPtrInt(row[j])
 			case "RANK_PG_AST":
-				record.RankPgAst = toOptionalInt(row[j])
+				record.RankPgAst = toPtrInt(row[j])
 			case "RANK_PG_STL":
-				record.RankPgStl = toOptionalInt(row[j])
+				record.RankPgStl = toPtrInt(row[j])
 			case "RANK_PG_BLK":
-				record.RankPgBlk = toOptionalInt(row[j])
+				record.RankPgBlk = toPtrInt(row[j])
 			case "RANK_PG_TOV":
-				record.RankPgTov = toOptionalInt(row[j])
+				record.RankPgTov = toPtrInt(row[j])
 			case "RANK_PG_FGM":
-				record.RankPgFgm = toOptionalInt(row[j])
+				record.RankPgFgm = toPtrInt(row[j])
 			case "RANK_PG_FGA":
-				record.RankPgFga = toOptionalInt(row[j])
+				record.RankPgFga = toPtrInt(row[j])
 			case "RANK_FG_PCT":
-				record.RankPgFgPct = toOptionalInt(row[j])
+				record.RankPgFgPct = toPtrInt(row[j])
 			case "RANK_PG_FG3M":
-				record.RankPgFg3m = toOptionalInt(row[j])
+				record.RankPgFg3m = toPtrInt(row[j])
 			case "RANK_PG_FG3A":
-				record.RankPgFg3a = toOptionalInt(row[j])
+				record.RankPgFg3a = toPtrInt(row[j])
 			case "RANK_FG3_PCT":
-				record.RankPgFg3Pct = toOptionalInt(row[j])
+				record.RankPgFg3Pct = toPtrInt(row[j])
 			case "RANK_PG_FTM":
-				record.RankPgFtm = toOptionalInt(row[j])
+				record.RankPgFtm = toPtrInt(row[j])
 			case "RANK_PG_FTA":
-				record.RankPgFta = toOptionalInt(row[j])
+				record.RankPgFta = toPtrInt(row[j])
 			case "RANK_FT_PCT":
-				record.RankPgFtPct = toOptionalInt(row[j])
+				record.RankPgFtPct = toPtrInt(row[j])
 			case "RANK_PG_EFF":
-				record.RankPgEff = toOptionalInt(row[j])
+				record.RankPgEff = toPtrInt(row[j])
 			case "PLAYER_AGE":
 				// ignore
 			case "GP":
