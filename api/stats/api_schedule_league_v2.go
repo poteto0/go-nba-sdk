@@ -34,14 +34,10 @@ func GetScheduleLeagueV2(provider api.IProvider, params *types.ScheduleLeagueV2P
 
 	path = path + "?" + v.Encode()
 
-	resp, err := provider.Get(path, &constants.DefaultStatsHeaders)
+	resp, err := provider.Get(path, nil)
 	if err != nil {
-		statusCode := 0
-		if resp != nil {
-			statusCode = resp.StatusCode
-		}
 		return types.Response[types.ScheduleLeagueV2Response]{
-			StatusCode: statusCode,
+			StatusCode: resp.StatusCode,
 			Error:      err,
 		}
 	}
