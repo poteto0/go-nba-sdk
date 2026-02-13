@@ -30,21 +30,17 @@ func toFloat(v any) float64 {
 	return 0.0
 }
 
-func ptr[T any](v T) *T {
-	return &v
-}
-
 func toPtrInt(v any) *int {
 	if v == nil {
 		return nil
 	}
 
 	if i, ok := v.(int); ok {
-		return ptr(i)
+		return new(i)
 	}
 
 	if f, ok := v.(float64); ok {
-		return ptr(int(f))
+		return new(int(f))
 	}
 	return nil
 }
@@ -55,11 +51,11 @@ func toPtrFloat(v any) *float64 {
 	}
 
 	if f, ok := v.(float64); ok {
-		return ptr(f)
+		return new(f)
 	}
 
 	if i, ok := v.(int); ok {
-		return ptr(float64(i))
+		return new(float64(i))
 	}
 	return nil
 }
@@ -70,7 +66,7 @@ func toPtrString(v any) *string {
 	}
 
 	if s, ok := v.(string); ok {
-		return ptr(s)
+		return new(s)
 	}
 	return nil
 }

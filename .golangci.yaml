@@ -16,7 +16,9 @@ linters:
     - misspell
     - nakedret
     - prealloc
-    - staticcheck
+    # escape till patch released
+    # refs: https://github.com/dominikh/go-tools/issues/1698
+    #- staticcheck
     - unconvert
     - unparam
     - unused
