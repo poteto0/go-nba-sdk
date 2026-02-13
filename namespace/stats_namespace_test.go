@@ -99,3 +99,30 @@ func Test_Stats_GetLeagueStandings(t *testing.T) {
 		assert.Equal(t, 200, result.StatusCode)
 	})
 }
+
+func Test_Stats_GetScheduleLeagueV2(t *testing.T) {
+	t.Run("can get schedule league v2", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.StatsBaseUrl+constants.ScheduleLeagueV2Path,
+			httpmock.NewStringResponder(200, samples.SampleScheduleLeagueV2Response),
+		)
+
+		// Arrange
+		sn := namespace.NewStatsNamespace(newProviderForTest())
+
+		// Act
+		result := sn.GetScheduleLeagueV2(&types.ScheduleLeagueV2Params{
+			LeagueID: "00",
+			Season:   "2024-25",
+		})
+
+		// Assert
+		assert.NoError(t, result.Error)
+		assert.NotNil(t, result.Contents)
+		assert.Equal(t, 200, result.StatusCode)
+	})
+}
