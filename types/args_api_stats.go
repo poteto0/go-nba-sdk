@@ -37,3 +37,11 @@ type LeagueStandingsParams struct {
 	// optional
 	SeasonYear string `url:"SeasonYear"`
 }
+
+type ScheduleLeagueV2Params struct {
+	// optional default "00"
+	LeagueID string `url:"LeagueID"`
+
+	// optional default "2025-26"
+	Season string `url:"Season"`
+}
