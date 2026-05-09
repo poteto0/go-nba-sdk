@@ -1,9 +1,10 @@
 ---
-name: '📝: Documentation'
+name: "\U0001F4DD: Documentation"
 about: Fix or add documentation
-title: '📝: Documentation: <summary>'
+title: "\U0001F4DD: Documentation: <summary>"
 labels: documentation
 assignees: ''
+
 ---
 
 - [ ] I have checked other issues as much as possible.

@@ -1,9 +1,10 @@
 ---
-name: '✨: New API'
+name: "✨: New API"
 about: Request a new namespace API for NBA API
-title: '✨: New API: <name>'
-labels: enhancement, api
+title: "✨: New API: <name>"
+labels: enhancement
 assignees: ''
+
 ---
 
 - [ ] I have checked other issues as much as possible.
@@ -18,6 +19,7 @@ Check the applicable one:
 
 - [ ] `Stats`
 - [ ] `Live`
+- [ ] `Draft`
 - [ ] `Others`: <Name>
 
 **Information**

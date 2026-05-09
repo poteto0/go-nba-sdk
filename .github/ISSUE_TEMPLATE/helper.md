@@ -1,9 +1,10 @@
 ---
-name: '✨: Helper'
+name: "✨: Helper"
 about: Propose a new helper method for models
-title: '✨: Helper: <name>'
+title: "✨: Helper: <name>"
 labels: enhancement, helper
 assignees: ''
+
 ---
 
 - [ ] I have checked other issues as much as possible.
