@@ -58,7 +58,10 @@ type DraftCombineStatsParams struct {
 - Nullable fields are represented as pointers.
 
   ```go
-  result := draft.GetCombineStats(client, types.DraftCombineStatsParams{...})
+  result := draft.GetCombineStats(client, &types.DraftCombineStatsParams{
+  	LeagueID:   "00",
+  	SeasonYear: "2024-25",
+  })
 
   for _, resultSet := range result.Contents.ResultSets {
   	for _, record := range resultSet.RowSet {
