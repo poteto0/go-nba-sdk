@@ -7,7 +7,6 @@ import (
 )
 
 type IDraftNamespace interface {
-	GetDraftBoard(params *types.DraftBoardParams) types.Response[types.DraftBoardResponse]
 	GetCombineStats(params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponse]
 }
 
@@ -19,10 +18,6 @@ func NewDraftNamespace(provider api.IProvider) IDraftNamespace {
 	return &DraftNamespace{
 		provider: provider,
 	}
-}
-
-func (d *DraftNamespace) GetDraftBoard(params *types.DraftBoardParams) types.Response[types.DraftBoardResponse] {
-	return draft.GetDraftBoard(d.provider, params)
 }
 
 func (d *DraftNamespace) GetCombineStats(params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponse] {

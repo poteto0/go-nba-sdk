@@ -5,8 +5,6 @@ var (
 	PlayerCareerStatsPath = "playercareerstats"
 	IstStandingsPath      = "iststandings"
 	LeagueStandingsPath   = "leaguestandings"
-	DraftBoardPath        = "draftboard"
-	DraftCombineStatsPath = "draftcombinestats"
 	ScheduleLeagueV2Path  = "scheduleleaguev2"
 )
 
@@ -15,4 +13,9 @@ var (
 	ScoreBoardPath = "scoreboard"
 	BoxScorePath   = "boxscore"
 	PlayByPlayPath = "playbyplay"
+)
+
+// draft api
+var (
+	DraftCombineStatsPath = "draftcombinestats"
 )
