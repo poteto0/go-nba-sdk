@@ -4,15 +4,63 @@ sidebar_position: 2
 
 # Combine Stats
 
-Get draft combine stats.
+get Draft Combine Stats
 
-## Endpoint
+## ⚡ Quick Start
 
-`draftcombinestats`
+```go title="main.go"
+func main() {
+	client := gns.NewClient(nil)
+	result := client.Draft.GetCombineStats(&types.DraftCombineStatsParams{
+		LeagueID:   "00",
+		SeasonYear: "2025-26",
+	})
 
-## Parameters
+	if result.Error != nil {
+		panic(result.Error)
+	}
 
-| Parameter | Type | Required | Description |
-| :--- | :--- | :---: | :--- |
-| `LeagueID` | string | No | The identifier for the league (default: 00) |
-| `SeasonYear` | string | Yes | The season in `YYYY-YY` format or `All Time` |
+	for _, resultSet := range result.Contents.ResultSets {
+		for _, record := range resultSet.RowSet {
+			fmt.Printf("Player: %s, Position: %s, Vertical: %v\n",
+				record.PlayerName,
+				record.Position,
+				record.StandingVertical,
+			)
+		}
+	}
+}
+```
+
+## 📜 Details
+
+### Arg
+
+```go title="arg.go"
+type DraftCombineStatsParams struct {
+	// optional default "00"
+	LeagueID string `url:"LeagueID,omitempty"`
+
+	// required
+	SeasonYear string `url:"SeasonYear,omitempty"`
+}
+```
+
+### Response
+
+[`response structure`](https://github.com/poteto0/go-nba-sdk/tree/main/types/response_draft_combine_stats.go)
+
+- Nullable fields are represented as pointers.
+
+  ```go
+  result := draft.GetCombineStats(client, types.DraftCombineStatsParams{...})
+
+  for _, resultSet := range result.Contents.ResultSets {
+  	for _, record := range resultSet.RowSet {
+  		// Example of handling nullable field
+  		if record.StandingVertical != nil {
+  			fmt.Printf("Vertical: %v\n", *record.StandingVertical)
+  		}
+  	}
+  }
+  ```
