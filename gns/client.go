@@ -9,6 +9,7 @@ import (
 type Client struct {
 	Stats namespace.IStatsNamespace
 	Live  namespace.ILiveNamespace
+	Draft namespace.IDraftNamespace
 }
 
 func NewClient(config *types.GnsConfig) *Client {
@@ -19,5 +20,6 @@ func NewClient(config *types.GnsConfig) *Client {
 	return &Client{
 		Stats: namespace.NewStatsNamespace(provider),
 		Live:  namespace.NewLiveNamespace(provider),
+		Draft: namespace.NewDraftNamespace(provider),
 	}
 }

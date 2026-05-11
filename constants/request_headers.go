@@ -10,6 +10,7 @@ var DefaultStatsHeaders = http.Header{
 	"Accept-Language":  {"en-US,en;q=0.5"},
 	"Accept-Encoding":  {"gzip, deflate, br"},
 	"Connection":       {"keep-alive"},
+	"Origin":           {"https://www.nba.com"},
 	"Pragma":           {"no-cache"},
 	"Cache-Control":    {"no-cache"},
 	"Sec-Ch-Ua":        {"\"Chromium\";v=\"140\", \"Google Chrome\";v=\"140\", \"Not;A=Brand\";v=\"99\""},
