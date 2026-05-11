@@ -16,24 +16,24 @@ func newProviderForTest() api.IProvider {
 	return api.NewProvider(nil)
 }
 
-func Test_GetDraftBoard(t *testing.T) {
-	t.Run("can get draft board", func(t *testing.T) {
+func Test_GetCombineStats(t *testing.T) {
+	t.Run("can get combine stats", func(t *testing.T) {
 		httpmock.Activate(t)
 		defer httpmock.DeactivateAndReset()
 
 		httpmock.RegisterResponder(
 			"GET",
-			constants.StatsBaseUrl+constants.DraftBoardPath,
-			httpmock.NewStringResponder(200, samples.SampleDraftBoardResponse),
+			constants.StatsBaseUrl+constants.DraftCombineStatsPath,
+			httpmock.NewStringResponder(200, samples.SampleDraftCombineStatsResponse),
 		)
 
 		// Arrange
 		provider := newProviderForTest()
 
 		// Act
-		result := draft.GetDraftBoard(provider, &types.DraftBoardParams{
+		result := draft.GetCombineStats(provider, &types.DraftCombineStatsParams{
 			LeagueID:   "00",
-			SeasonYear: "2025",
+			SeasonYear: "2025-26",
 		})
 
 		// Assert
@@ -42,7 +42,7 @@ func Test_GetDraftBoard(t *testing.T) {
 		assert.Equal(t, 200, result.StatusCode)
 
 		// assert contents
-		assert.Equal(t, "draftboard", *result.Contents.Resource)
+		assert.Equal(t, "draftcombinestats", result.Contents.Resource)
 		assert.NotEmpty(t, result.Contents.ResultSets)
 	})
 
@@ -52,7 +52,7 @@ func Test_GetDraftBoard(t *testing.T) {
 
 		httpmock.RegisterResponder(
 			"GET",
-			constants.StatsBaseUrl+constants.DraftBoardPath,
+			constants.StatsBaseUrl+constants.DraftCombineStatsPath,
 			httpmock.NewErrorResponder(assert.AnError),
 		)
 
@@ -60,9 +60,9 @@ func Test_GetDraftBoard(t *testing.T) {
 		provider := newProviderForTest()
 
 		// Act
-		result := draft.GetDraftBoard(provider, &types.DraftBoardParams{
+		result := draft.GetCombineStats(provider, &types.DraftCombineStatsParams{
 			LeagueID:   "00",
-			SeasonYear: "2025",
+			SeasonYear: "2025-26",
 		})
 
 		// Assert
@@ -76,7 +76,7 @@ func Test_GetDraftBoard(t *testing.T) {
 
 		httpmock.RegisterResponder(
 			"GET",
-			constants.StatsBaseUrl+constants.DraftBoardPath,
+			constants.StatsBaseUrl+constants.DraftCombineStatsPath,
 			httpmock.NewStringResponder(200, "invalid"),
 		)
 
@@ -84,9 +84,9 @@ func Test_GetDraftBoard(t *testing.T) {
 		provider := newProviderForTest()
 
 		// Act
-		result := draft.GetDraftBoard(provider, &types.DraftBoardParams{
+		result := draft.GetCombineStats(provider, &types.DraftCombineStatsParams{
 			LeagueID:   "00",
-			SeasonYear: "2025",
+			SeasonYear: "2025-26",
 		})
 
 		// Assert
