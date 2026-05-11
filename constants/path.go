@@ -5,6 +5,7 @@ var (
 	PlayerCareerStatsPath = "playercareerstats"
 	IstStandingsPath      = "iststandings"
 	LeagueStandingsPath   = "leaguestandings"
+	DraftBoardPath        = "draftboard"
 	ScheduleLeagueV2Path  = "scheduleleaguev2"
 )
 
