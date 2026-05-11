@@ -9,7 +9,7 @@ import (
 	"github.com/poteto0/go-nba-sdk/types"
 )
 
-func GetCombineStats(provider api.IProvider, params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponse] {
+func GetCombineStats(provider api.IProvider, params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponseContent] {
 	if params == nil {
 		params = &types.DraftCombineStatsParams{}
 	}
@@ -21,28 +21,28 @@ func GetCombineStats(provider api.IProvider, params *types.DraftCombineStatsPara
 	path := constants.StatsBaseUrl + constants.DraftCombineStatsPath
 	v, err := query.Values(params)
 	if err != nil {
-		return types.Response[types.DraftCombineStatsResponse]{Error: err}
+		return types.Response[types.DraftCombineStatsResponseContent]{Error: err}
 	}
 
 	path = path + "?" + v.Encode()
 
 	resp, err := provider.Get(path, &constants.DefaultStatsHeaders)
 	if err != nil {
-		return types.Response[types.DraftCombineStatsResponse]{Error: err}
+		return types.Response[types.DraftCombineStatsResponseContent]{Error: err}
 	}
 	defer resp.Body.Close()
 
 	rawResp, err := internal.ParseResponse(resp)
 	if err != nil {
-		return types.Response[types.DraftCombineStatsResponse]{StatusCode: resp.StatusCode, Error: err}
+		return types.Response[types.DraftCombineStatsResponseContent]{StatusCode: resp.StatusCode, Error: err}
 	}
 
 	contents, err := parser.ParseDraftCombineStatsResponse(rawResp)
 	if err != nil {
-		return types.Response[types.DraftCombineStatsResponse]{StatusCode: resp.StatusCode, Error: err}
+		return types.Response[types.DraftCombineStatsResponseContent]{StatusCode: resp.StatusCode, Error: err}
 	}
 
-	return types.Response[types.DraftCombineStatsResponse]{
+	return types.Response[types.DraftCombineStatsResponseContent]{
 		Contents:   contents,
 		StatusCode: resp.StatusCode,
 		Error:      nil,

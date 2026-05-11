@@ -20,19 +20,17 @@ func main() {
 		panic(result.Error)
 	}
 
-	for _, resultSet := range resCombine.Contents.ResultSets {
-		for _, record := range resultSet.CombineStats {
-			var standingVert float64
-			if record.StandingVertical != nil {
-				standingVert = *record.StandingVertical
-			}
-
-			fmt.Printf("Player: %s, Position: %s, Vertical: %v\n",
-				record.PlayerName,
-				record.Position,
-				standingVert,
-			)
+	for _, record := range resCombine.Contents.CombineStats {
+		var standingVert float64
+		if record.StandingVertical != nil {
+			standingVert = *record.StandingVertical
 		}
+
+		fmt.Printf("Player: %s, Position: %s, Vertical: %v\n",
+			record.PlayerName,
+			record.Position,
+			standingVert,
+		)
 	}
 }
 ```

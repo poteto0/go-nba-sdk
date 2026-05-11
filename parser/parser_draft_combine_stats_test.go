@@ -43,11 +43,9 @@ func TestParseDraftCombineStatsResponse(t *testing.T) {
 
 		// Assert
 		assert.NoError(t, err)
-		assert.Equal(t, "draftcombinestats", result.Resource)
-		assert.Equal(t, 1, len(result.ResultSets))
-		assert.Equal(t, 1, len(result.ResultSets[0].CombineStats))
+		assert.Equal(t, 1, len(result.CombineStats))
 
-		record := result.ResultSets[0].CombineStats[0]
+		record := result.CombineStats[0]
 		assert.Equal(t, "2024", record.Season)
 		assert.Equal(t, 1641700, record.PlayerID)
 		assert.Equal(t, "Reed", record.FirstName)

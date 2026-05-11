@@ -7,7 +7,7 @@ import (
 )
 
 type IDraftNamespace interface {
-	GetCombineStats(params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponse]
+	GetCombineStats(params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponseContent]
 }
 
 type DraftNamespace struct {
@@ -20,6 +20,6 @@ func NewDraftNamespace(provider api.IProvider) IDraftNamespace {
 	}
 }
 
-func (d *DraftNamespace) GetCombineStats(params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponse] {
+func (d *DraftNamespace) GetCombineStats(params *types.DraftCombineStatsParams) types.Response[types.DraftCombineStatsResponseContent] {
 	return draft.GetCombineStats(d.provider, params)
 }

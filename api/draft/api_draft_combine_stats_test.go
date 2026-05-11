@@ -42,8 +42,7 @@ func Test_GetCombineStats(t *testing.T) {
 		assert.Equal(t, 200, result.StatusCode)
 
 		// assert contents
-		assert.Equal(t, "draftcombinestats", result.Contents.Resource)
-		assert.NotEmpty(t, result.Contents.ResultSets)
+		assert.NotEmpty(t, result.Contents.CombineStats)
 	})
 
 	t.Run("network error is w/o status code", func(t *testing.T) {

@@ -1,11 +1,6 @@
 package types
 
-type DraftCombineStatsResponse struct {
-	Resource   string
-	ResultSets []DraftCombineStatsResultSet
-}
-
-type DraftCombineStatsResultSet struct {
+type DraftCombineStatsResponseContent struct {
 	CombineStats []DraftCombineStatsRecord `json:"combineStats"`
 }
 

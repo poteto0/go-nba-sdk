@@ -4,28 +4,24 @@ import (
 	"github.com/poteto0/go-nba-sdk/types"
 )
 
-func ParseDraftCombineStatsResponse(rawResponse types.RawResponse) (types.DraftCombineStatsResponse, error) {
+func ParseDraftCombineStatsResponse(rawResponse types.RawResponse) (types.DraftCombineStatsResponseContent, error) {
 	if rawResponse.Resource != "draftcombinestats" {
-		return types.DraftCombineStatsResponse{}, types.NewGnsError(
+		return types.DraftCombineStatsResponseContent{}, types.NewGnsError(
 			"unexpected resource: %s", rawResponse.Resource,
 		)
 	}
 
 	if len(rawResponse.ResultSets) == 0 {
-		return types.DraftCombineStatsResponse{}, types.NewGnsError(
+		return types.DraftCombineStatsResponseContent{}, types.NewGnsError(
 			"unexpected no record",
 		)
 	}
 
-	content := types.DraftCombineStatsResponse{
-		Resource: rawResponse.Resource,
-	}
+	content := types.DraftCombineStatsResponseContent{}
 
 	for _, resultSet := range rawResponse.ResultSets {
 		if resultSet.Name == "DraftCombineStats" {
-			content.ResultSets = append(content.ResultSets, types.DraftCombineStatsResultSet{
-				CombineStats: parseDraftCombineStatsRecords(resultSet.RowSet, resultSet.Headers),
-			})
+			content.CombineStats = parseDraftCombineStatsRecords(resultSet.RowSet, resultSet.Headers)
 		}
 	}
 
