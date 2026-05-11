@@ -1,13 +1,11 @@
 package draft
 
 import (
-	"encoding/json"
-	"fmt"
-	"io"
-
 	"github.com/google/go-querystring/query"
 	"github.com/poteto0/go-nba-sdk/api"
 	"github.com/poteto0/go-nba-sdk/constants"
+	"github.com/poteto0/go-nba-sdk/internal"
+	"github.com/poteto0/go-nba-sdk/parser"
 	"github.com/poteto0/go-nba-sdk/types"
 )
 
@@ -34,21 +32,14 @@ func GetCombineStats(provider api.IProvider, params *types.DraftCombineStatsPara
 	}
 	defer resp.Body.Close()
 
-	bodyBytes, err := io.ReadAll(resp.Body)
+	rawResp, err := internal.ParseResponse(resp)
 	if err != nil {
 		return types.Response[types.DraftCombineStatsResponse]{StatusCode: resp.StatusCode, Error: err}
 	}
-	if len(bodyBytes) == 0 {
-		return types.Response[types.DraftCombineStatsResponse]{StatusCode: resp.StatusCode, Error: types.NewGnsError("empty body. Status: %d", resp.StatusCode)}
-	}
 
-	var contents types.DraftCombineStatsResponse
-	err = json.Unmarshal(bodyBytes, &contents)
+	contents, err := parser.ParseDraftCombineStatsResponse(rawResp)
 	if err != nil {
-		return types.Response[types.DraftCombineStatsResponse]{
-			StatusCode: resp.StatusCode,
-			Error:      fmt.Errorf("json unmarshal err: %w, body: %s", err, string(bodyBytes)),
-		}
+		return types.Response[types.DraftCombineStatsResponse]{StatusCode: resp.StatusCode, Error: err}
 	}
 
 	return types.Response[types.DraftCombineStatsResponse]{

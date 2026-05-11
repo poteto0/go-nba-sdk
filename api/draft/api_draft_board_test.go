@@ -4,17 +4,12 @@ import (
 	"testing"
 
 	"github.com/jarcoal/httpmock"
-	"github.com/poteto0/go-nba-sdk/api"
 	"github.com/poteto0/go-nba-sdk/api/draft"
 	"github.com/poteto0/go-nba-sdk/constants"
 	"github.com/poteto0/go-nba-sdk/fixtures/samples"
 	"github.com/poteto0/go-nba-sdk/types"
 	"github.com/stretchr/testify/assert"
 )
-
-func newProviderForTest() api.IProvider {
-	return api.NewProvider(nil)
-}
 
 func Test_GetDraftBoard(t *testing.T) {
 	t.Run("can get draft board", func(t *testing.T) {
