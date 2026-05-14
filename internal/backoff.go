@@ -59,5 +59,6 @@ func (b *BackoffManager) calculateExponentialBackOffDelay() float64 {
 		return float64(0)
 	}
 
+	//nolint:gosec
 	return math.Min(b.lastDelay+(rand.Float64()-0.5)*b.lastDelay, b.config.MaxDelayMs)
 }
