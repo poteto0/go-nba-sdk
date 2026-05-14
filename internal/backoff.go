@@ -1,8 +1,9 @@
 package internal
 
 import (
+	"crypto/rand"
 	"math"
-	"math/rand"
+	"math/big"
 	"sync"
 	"time"
 
@@ -59,6 +60,13 @@ func (b *BackoffManager) calculateExponentialBackOffDelay() float64 {
 		return float64(0)
 	}
 
-	//nolint:gosec
-	return math.Min(b.lastDelay+(rand.Float64()-0.5)*b.lastDelay, b.config.MaxDelayMs)
+	return math.Min(b.lastDelay+(randomF64(1.0)-0.5)*b.lastDelay, b.config.MaxDelayMs)
+}
+
+func randomF64(max float64) float64 {
+	nBig, err := rand.Int(rand.Reader, big.NewInt(int64(max)))
+	if err != nil {
+		panic(err)
+	}
+	return float64(nBig.Int64() / int64(max))
 }
