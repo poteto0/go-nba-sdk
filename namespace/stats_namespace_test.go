@@ -126,3 +126,29 @@ func Test_Stats_GetScheduleLeagueV2(t *testing.T) {
 		assert.Equal(t, 200, result.StatusCode)
 	})
 }
+
+func Test_Stats_GetPlayByPlay(t *testing.T) {
+	t.Run("can get play by play", func(t *testing.T) {
+		httpmock.Activate(t)
+		defer httpmock.DeactivateAndReset()
+
+		httpmock.RegisterResponder(
+			"GET",
+			constants.StatsBaseUrl+constants.PlayByPlayV3Path,
+			httpmock.NewStringResponder(200, samples.SampleLivePlayByPlayResponse),
+		)
+
+		// Arrange
+		sn := namespace.NewStatsNamespace(newProviderForTest())
+
+		// Act
+		result := sn.GetPlayByPlay(&types.PlayByPlayParams{
+			GameID: "0022000001",
+		})
+
+		// Assert
+		assert.NoError(t, result.Error)
+		assert.NotNil(t, result.Contents)
+		assert.Equal(t, 200, result.StatusCode)
+	})
+}
