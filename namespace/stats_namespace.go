@@ -17,6 +17,9 @@ type IStatsNamespace interface {
 
 	// get schedule
 	GetScheduleLeagueV2(params *types.ScheduleLeagueV2Params) types.Response[types.ScheduleLeagueV2Response]
+
+	// get play by play (live)
+	GetPlayByPlay(params *types.PlayByPlayParams) types.Response[types.LivePlayByPlayResponse]
 }
 
 type StatsNamespace struct {
@@ -43,4 +46,8 @@ func (s *StatsNamespace) GetLeagueStandings(params *types.LeagueStandingsParams)
 
 func (s *StatsNamespace) GetScheduleLeagueV2(params *types.ScheduleLeagueV2Params) types.Response[types.ScheduleLeagueV2Response] {
 	return stats.GetScheduleLeagueV2(s.provider, params)
+}
+
+func (s *StatsNamespace) GetPlayByPlay(params *types.PlayByPlayParams) types.Response[types.LivePlayByPlayResponse] {
+	return stats.GetPlayByPlay(s.provider, params)
 }
