@@ -15,9 +15,9 @@ type ScheduleLeagueV2Params struct {
 
 // live api
 var (
-	ScoreBoardPath = "scoreboard"
-	BoxScorePath   = "boxscore"
-	PlayByPlayPath = "playbyplay"
+	ScoreBoardPath   = "scoreboard"
+	BoxScorePath     = "boxscore"
+	PlayByPlayPath   = "playbyplay"
 	PlayByPlayV3Path = "playbyplayv3"
 )
 
