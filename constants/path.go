@@ -8,11 +8,17 @@ var (
 	ScheduleLeagueV2Path  = "scheduleleaguev2"
 )
 
+type ScheduleLeagueV2Params struct {
+	LeagueID string
+	Season   string
+}
+
 // live api
 var (
 	ScoreBoardPath = "scoreboard"
 	BoxScorePath   = "boxscore"
 	PlayByPlayPath = "playbyplay"
+	PlayByPlayV3Path = "playbyplayv3"
 )
 
 // draft api

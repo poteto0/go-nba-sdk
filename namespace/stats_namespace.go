@@ -3,7 +3,6 @@ package namespace
 import (
 	"github.com/poteto0/go-nba-sdk/api"
 	"github.com/poteto0/go-nba-sdk/api/stats"
-	"github.com/poteto0/go-nba-sdk/api/live"
 	"github.com/poteto0/go-nba-sdk/types"
 )
 
@@ -50,5 +49,5 @@ func (s *StatsNamespace) GetScheduleLeagueV2(params *types.ScheduleLeagueV2Param
 }
 
 func (s *StatsNamespace) GetPlayByPlay(params *types.PlayByPlayParams) types.Response[types.LivePlayByPlayResponse] {
-	return live.GetPlayByPlay(s.provider, params)
+	return stats.GetPlayByPlay(s.provider, params)
 }
