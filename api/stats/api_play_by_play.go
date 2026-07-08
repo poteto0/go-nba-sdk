@@ -16,6 +16,12 @@ func GetPlayByPlay(provider api.IProvider, params *types.PlayByPlayParams) types
 	if params.GameID == "" {
 		return types.Response[types.LivePlayByPlayResponse]{Error: types.NewGnsError("game id is required")}
 	}
+	if params.StartPeriod == 0 {
+		params.StartPeriod = 1
+	}
+	if params.EndPeriod == 0 {
+		params.EndPeriod = 4
+	}
 
 	path := constants.StatsBaseUrl + constants.PlayByPlayV3Path
 	v, err := query.Values(params)
@@ -23,7 +29,6 @@ func GetPlayByPlay(provider api.IProvider, params *types.PlayByPlayParams) types
 		return types.Response[types.LivePlayByPlayResponse]{Error: err}
 	}
 	path = path + "?" + v.Encode()
-
 	resp, err := provider.Get(path, &constants.DefaultStatsHeaders)
 	if err != nil {
 		return types.Response[types.LivePlayByPlayResponse]{Error: err}

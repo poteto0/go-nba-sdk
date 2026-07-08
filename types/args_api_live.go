@@ -13,4 +13,10 @@ type BoxScoreParams struct {
 type PlayByPlayParams struct {
 	// !required
 	GameID string
+
+	// optional default is 1
+	StartPeriod int
+
+	// optional default is 4
+	EndPeriod int
 }
